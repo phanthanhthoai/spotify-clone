@@ -29,11 +29,8 @@ class ArtistViewSet(RetrieveModelMixin, GenericViewSet):
      def get_all_artist(self, request):
           queryset = self.get_queryset()
           serializer = self.get_serializer(queryset, many=True)
-          return Response({
-               "message":"Artists retrieved successfully",
-               "data":serializer.data},
-               status=200
-          )
+
+          return ApiResponse.build(data=serializer.data)
 
      # Get artist by name (GET /artists/by-name/?name=ArtistName)
      @action(methods=['get'], detail=False, url_path='by-name')

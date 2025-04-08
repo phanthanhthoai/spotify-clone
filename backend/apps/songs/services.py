@@ -1,9 +1,13 @@
+from apps.base_service import BaseService
 from apps.songs.models import Song
 from utils.exceptions import NotFoundException
 from apps.songs.filters import SongFilter
 
 
-class SongService:
+class SongService(BaseService):
+     model_class = Song
+     filter_class = SongFilter
+
      def get_list_songs(self, request):
           queryset = Song.objects.all()
           filter = SongFilter(request, queryset=queryset)

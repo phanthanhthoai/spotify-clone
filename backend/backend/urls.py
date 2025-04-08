@@ -25,7 +25,7 @@ urlpatterns = [
     path('auth', include('apps.authentications.urls')),
     path('role', include('apps.roles.urls')),
     path('artist/', include('apps.artists.urls')),
-    path('songs/', include('apps.songs.urls')),
+    path('songs', include('apps.songs.urls')),
     path('albums/', include('apps.albums.urls')),
     path('playlists/', include('apps.playlists.urls')),
     # path('api/',include('base.urls'))

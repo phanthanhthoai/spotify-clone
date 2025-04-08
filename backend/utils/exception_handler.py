@@ -15,7 +15,5 @@ def custom_exception_handler(exc, context):
     
     if isinstance(exc, ValidationException):
          return ApiResponse.build(message=str(exc), status=402)
-    
-    
-    
+
     return ApiResponse.build(message="Internal server error", status=500, errors=str(exc))

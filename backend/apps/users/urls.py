@@ -7,5 +7,6 @@ router = DefaultRouter()
 router.register('', UserViewSet, basename='user')
 
 urlpatterns = [
-     path('', include(router.urls))
+     path('', UserViewSet.as_view({'get': 'list'}), name='user-list'),
+     path('/<int:pk>', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}))
 ]
