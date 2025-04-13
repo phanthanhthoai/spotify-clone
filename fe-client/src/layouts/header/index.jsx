@@ -9,7 +9,7 @@ export default function Header() {
                 <img src={logo} className="w-35px"/>
             </div>
             <div className="grow flex justify-center items-center gap-3">
-                <IconButton rounded="full" size="lg">
+                <IconButton rounded="full" size="lg" className="custom-icon-button">
                     <House className="w-20px h-20px"/>
                 </IconButton>
 

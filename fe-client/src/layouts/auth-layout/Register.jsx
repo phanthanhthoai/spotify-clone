@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import {Form, Formik} from "formik";
 import logo from "../../assets/images/icons/icon-spotify-gray.png";
-import FormInputField from "../../common/components/FormInputField.jsx";
+import FormInputField from "../../components/FormInputField.jsx";
 import {Button} from "@chakra-ui/react";
 import authService from "../../api/authService.js";
 import {toaster} from "../../components/ui/toaster.jsx";

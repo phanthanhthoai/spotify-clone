@@ -19,19 +19,38 @@
   background-color:  custom_variable.$color-primary-dark !important;
 }
 
-.form-group {
-  .form-label {
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem !important;
-  }
-}
-
 .transform-scale {
   transition: 0.3s all ease-in-out;
 
-
   &:hover {
     transform: scale(1.05);
+  }
+}
+
+.custom-icon-button {
+  background-color: custom_variable.$color-dark-normal !important;
+  transition: 0.2s all ease-in-out;
+  color: white;
+
+  &:hover {
+    background-color: custom_variable.$color-dark-highlight !important;
+  }
+}
+
+.button-dark {
+  height: auto;
+  border-radius: 20px;
+  padding: 8px 15px !important;
+  background-color: custom_variable.$color-dark-normal !important;
+  transition: 0.2s all ease-in-out;
+  color: white;
+
+  &:hover {
+    background-color: custom_variable.$color-dark-highlight !important;
+  }
+
+  &.active {
+    background-color: white !important;
+    color: custom_variable.$color-dark-normal !important;
   }
 }

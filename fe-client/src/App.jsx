@@ -6,6 +6,7 @@ import AuthLayout from "./layouts/auth-layout/index.jsx";
 import Login from "./layouts/auth-layout/Login.jsx";
 import { Toaster } from "./components/ui/toaster"
 import Register from "./layouts/auth-layout/Register.jsx";
+import Album from "./pages/album/index.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/" element={<MainLayout/>}>
                   <Route index element={<Home/>}></Route>
                   <Route path="playlist" element={<PlayList/>}></Route>
+                  <Route path="albumn" element={<Album/>}></Route>
               </Route>
           </Routes>
       </BrowserRouter>
