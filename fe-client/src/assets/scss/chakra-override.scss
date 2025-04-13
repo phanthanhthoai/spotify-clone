@@ -1,0 +1,32 @@
+@use "custom_variable.scss";
+
+//.chakra-button {
+//  background-color: custom_variable.$color-dark-normal !important;
+//  transition: 0.2s all ease-in-out;
+//
+//  &:hover {
+//    background-color: custom_variable.$color-dark-normal !important;
+//  }
+//}
+
+.chakra-input {
+  border: 1px solid var(--color-gray-400) !important;
+  font-weight: 600;
+  padding: 12px 10px !important;
+  transition: 0.3s all ease-in-out;
+  height: auto !important;
+  border-radius: 6px;
+  outline: none;
+
+  &:focus[aria-invalid="true"]{
+    border-color: red !important;
+  }
+
+  &:hover {
+    border-color: white !important;
+  }
+}
+
+.chakra-field__label {
+  font-weight: 600 !important;
+}

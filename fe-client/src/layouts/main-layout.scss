@@ -1,3 +1,70 @@
+@use "../assets/scss/custom.scss";
+@use "../assets/scss/custom_variable.scss";
+
 .main-layout {
   transition: 0.2s all ease-in-out;
+}
+
+.header-layout {
+  background-color: black;
+  padding: 10px 30px !important;
+}
+
+.part-layout {
+  @extend .bg-dark-base;
+  border-radius: 6px;
+}
+
+.app-container {
+  padding: 0 10px;
+}
+
+.header-avatar {
+  cursor: pointer;
+  background-color: white;
+  border: 10px solid custom_variable.$color-primary-dark;
+  transition: 0.2s all ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.header-search-bar {
+  padding: 0 10px;
+  background-color: custom_variable.$color-dark-normal;
+  border-radius: 50px;
+  overflow: hidden;
+  width: 500px;
+  position: relative;
+  transition: 0.3s all ease-in-out;
+  border: 2px solid custom_variable.$color-dark-normal;
+
+  .header-search-icon {
+    transform: translateY(-50%);
+    top: 50%;
+  }
+
+  &:hover {
+    background-color: custom_variable.$color-dark-highlight;
+    border-color: custom_variable.$color-dark-highlight;
+  }
+
+  &:focus-within {
+    border-color: white;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 30px;
+    color: var(--color-gray-200);
+    outline: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+
+    &::placeholder {
+      color: var(--color-gray-400);
+    }
+  }
 }

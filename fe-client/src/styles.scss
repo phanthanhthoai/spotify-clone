@@ -1,1 +1,15 @@
-@use "tailwindcss";
+@use "assets/scss/chakra-override.scss";
+
+.page-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.css-1l1nhrq {
+  padding: 10px 10px !important;
+  font-weight: 600;
+
+  &[data-type="success"] {
+    background-color: #1fd760;
+  }
+}

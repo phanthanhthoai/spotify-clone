@@ -10,7 +10,7 @@ class ApiResponse:
           
      @classmethod
      def build(cls, data=None, errors=None, message=None, status=200):
-          return Response(cls(data=data, errors=errors, message=message, status=status).to_dict(), status=status)
+          return Response(cls(data=data, errors=errors, message=message, status=status).to_dict(), status=200)
      
      def to_dict(self):
           return {
