@@ -8,5 +8,5 @@ router.register('', UserViewSet, basename='user')
 
 urlpatterns = [
      path('', UserViewSet.as_view({'get': 'list'}), name='user-list'),
-     path('/<int:pk>', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}))
+     path('<int:pk>', UserViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}))
 ]

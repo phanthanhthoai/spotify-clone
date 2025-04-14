@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import PlaylistViewSet
 
 router = DefaultRouter()
-router.register('', PlaylistViewSet, basename='playlists')
+router.register('', PlaylistViewSet, basename='playlist')
 
 urlpatterns = [
     path('', PlaylistViewSet.as_view({'get': 'list','post':'create'}), name='playlist-list'),

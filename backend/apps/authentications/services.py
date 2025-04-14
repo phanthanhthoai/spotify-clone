@@ -3,6 +3,7 @@ from apps.users.models import User
 from apps.authentications.models import UserSession
 from utils.exceptions import LogicException, NotFoundException
 from rest_framework_simplejwt.tokens import AccessToken
+from django.utils import timezone
 
 class AuthService:
      def register(self, data):
@@ -31,7 +32,8 @@ class AuthService:
           user_session = UserSession.objects.create(
                user=user,
                token=str(token),
-               expired_at=datetime.datetime.now() + datetime.timedelta(days=1)
+               # expired_at=datetime.datetime.now() + datetime.timedelta(days=1)
+               expired_at = timezone.now() + timezone.timedelta(days=1)
           )
           
           return str(token)
