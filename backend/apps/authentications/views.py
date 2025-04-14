@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from rest_framework.decorators import action
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from apps.authentications.services import AuthService
 from apps.authentications.serializers import LoginRequestSerializer, RegisterRequestSerializer
@@ -26,7 +27,7 @@ class AuthViewSet(ViewSet):
           return super().get_authenticators()
 
 
-     @action(methods=['get'], detail=False, url_path='user', permission_classes=[IsAuthenticated])
+     @action(methods=['get'], detail=False, url_path='user', authentication_classes=[JWTAuthentication], permission_classes=[IsAuthenticated])
      def authenticated_user(self, request):
           user = request.user
           return Response({"id":user.id,"username": user.username, "email": user.email})
