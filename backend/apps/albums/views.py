@@ -5,71 +5,82 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import AllowAny
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 from apps.albums.models import Album
-from apps.albums.serializers import AlbumSerializer, AlbumCreateRequestSerializer, UpdateAlbumSerializer
+from apps.albums.serializers import AlbumSerializer, AlbumCreateRequestSerializer, UpdateAlbumSerializer, AlbumSongSerializer
 from apps.albums.services import AlbumService
-
-class AlbumViewSet(RetrieveModelMixin, GenericViewSet):
-    queryset = Album.objects.all()
-    serializer_class = AlbumSerializer
+from utils.api_response import ApiResponse
+from utils.exceptions import NotFoundException
+from rest_framework.viewsets import ViewSet
+from apps.songs.services import SongService
+class AlbumViewSet(ViewSet):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [AllowAny]
-
+    permission_classes = [IsAuthenticated]
+    
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.album_service = AlbumService()
+        self.song_service = SongService()
 
-    # Lấy tất cả albums (GET /albums/all/)
-    @action(methods=['get'], detail=False, url_path='all')
-    def get_all_albums(self, request):
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({
-            "message": "Albums retrieved successfully",
-            "data": serializer.data
-        }, status=200)
-
-    # Lấy album theo tên (GET /albums/by-name/?name=AlbumName)
-    @action(methods=['get'], detail=False, url_path='by-name')
-    def get_album_by_name(self, request):
-     name = request.query_params.get('name', '')
-
-     if not name:
-         return Response({"message": "Vui lòng nhập tên album"}, status=400)
-
-     albums = Album.objects.filter(title__icontains=name)  # Tìm kiếm gần đúng
-
-
-     if not albums.exists():
-         return Response({"message": "Không tìm thấy album nào"}, status=404)
-
-     serializer = self.get_serializer(albums, many=True)
-     return Response({
-         "message": "Albums retrieved successfully",
-         "data": serializer.data 
-     }, status=200)
-    # Tạo album mới (POST /albums/create/)
-    @action(methods=['post'], detail=False, url_path='create')
-    def create_album(self, request):
-        serializer = AlbumCreateRequestSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response({"message": "Album not created", "errors": serializer.errors}, status=400)
-
-        album = AlbumService().create_album(serializer.validated_data)
-        album_serializer = AlbumSerializer(album)
-
-        return Response(album_serializer.data, status=201)
-
-    # Cập nhật album (PATCH /albums/update/{id}/)
-    @action(methods=['patch'], detail=True, url_path='update')
-    def update_album(self, request, pk=None):
-        instance = self.get_object()
-        serializer = UpdateAlbumSerializer(instance, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response(
-            {"message": "Album updated successfully", "data": serializer.data},
-            status=200
+    def list(self, request):
+        paginated = self.album_service.list(request.GET, request)
+        return ApiResponse.build(data=paginated.get_paginated_response(AlbumSerializer))
+    
+    
+    def retrieve(self, request, pk=None):
+        album = self.album_service.get_album(pk)
+        return ApiResponse.build(data=AlbumSerializer(album).data)
+    
+    
+    def update(self, request, pk=None):
+        serializer = UpdateAlbumSerializer(
+            data=request.data,
+            context={'request': request}
         )
+        serializer.is_valid(raise_exception=True)
+        album = self.album_service.update_album(pk, serializer.validated_data)
+        return ApiResponse.build(data=AlbumSerializer(album).data)
+    
+    
+    def destroy(self, request, pk=None):
+        self.album_service.delete_album(pk)
+        return ApiResponse.build(message='Delete album successfully!')
+    
+    
+    def create(self, request):
+        serializer = AlbumCreateRequestSerializer(
+            data=request.data,
+            context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        album = self.album_service.create_album(serializer.validated_data)
+        return ApiResponse.build(data=AlbumSerializer(album).data)
+    
+    
+    @action(detail=True, methods=['get'], url_path='songs')
+    def get_albums_by_artist(self, request, artist_id):
+        albums = self.album_service.get_albums_by_artist(artist_id)
+        return ApiResponse.build(data=AlbumSerializer(albums, many=True).data)
+    
+    
+    @action(detail=True, methods=['post'], url_path='add-song/(?P<song_id>\d+)')
+    def add_song_to_album(self, request, album_id, song_id):
+        try:
+            album = self.album_service.get_album(album_id)
+            song = self.song_service.get_song(song_id)
+            return ApiResponse.build(data=AlbumSongSerializer(album).data)
+        except NotFoundException as e:
+            return ApiResponse.build(message=str(e), status=status.HTTP_404_NOT_FOUND)
+        
+        
+    @action(detail=True, methods=['post'], url_path='remove-song/(?P<song_id>\d+)')
+    def remove_song_from_album(self, request, album_id, song_id):
+        try:
+            album = self.album_service.get_album(album_id)
+            song = self.song_service.get_song(song_id)
+            return ApiResponse.build(data=AlbumSongSerializer(album).data)
+        except NotFoundException as e:
+            return ApiResponse.build(message=str(e), status=status.HTTP_404_NOT_FOUND)
+    

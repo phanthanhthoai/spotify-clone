@@ -1,24 +1,27 @@
 from rest_framework import serializers
 from .models import Album
-from apps.songs.models import Song
-from apps.songs.serializers import SongSerializer
-class SongSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Song
-        fields = '__all__'
+class AlbumSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=255)
+    artist = serializers.CharField(max_length=255, required=False)
+    release_date = serializers.DateField(required=False)
+    cover_image = serializers.ImageField(required=False)
+    
 
-class AlbumSerializer(serializers.ModelSerializer):
-    songs = SongSerializer(many=True, read_only=True)  # Lấy danh sách bài hát của album
+class AlbumCreateRequestSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=255)
+    artist = serializers.CharField(max_length=255, required=False)
+    release_date = serializers.DateField(required=False)
+    cover_image = serializers.ImageField(required=False)
+    
+    
+class UpdateAlbumSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=255, required=False)
+    artist = serializers.CharField(max_length=255, required=False)
+    release_date = serializers.DateField(required=False)
+    cover_image = serializers.ImageField(required=False)
 
-    class Meta:
-        model = Album
-        fields = '__all__'
 
-class AlbumCreateRequestSerializer(serializers.ModelSerializer):
-    class Meta:
+class AlbumSongSerializer(serializers.Serializer):
+    class Meta: 
         model = Album
-        fields = ['title', 'artist', 'release_date', 'cover_image']
-class UpdateAlbumSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Album
-        fields = ['title', 'release_date'] 
+        fields = ['album', 'song']

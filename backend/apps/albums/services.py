@@ -1,41 +1,77 @@
-from apps.albums.models import Album
+from apps.albums.models import Album, AlbumSong
 from utils.exceptions import NotFoundException
 from apps.albums.filters import AlbumFilter
+from apps.base_service  import BaseService
 
-class AlbumService:
-    def get_list_albums(self, request):
-        queryset = Album.objects.all()
-        filtered_queryset = AlbumFilter(request.GET, queryset=queryset).qs
-        return filtered_queryset
-
-    def get_album_by_name(self, name):
-        albums = Album.objects.filter(title__icontains=name)
-        if not albums.exists():
-            raise NotFoundException("Album not found")
-        return albums
-
+class AlbumService(BaseService):
+    
+    model_class = Album
+    filter_class = AlbumFilter
+    model_AlbumSong_class = AlbumSong
     def get_album(self, pk):
         album = Album.objects.filter(pk=pk).first()
         if not album:
-            raise NotFoundException("Album not found")
+            raise NotFoundException('Album not found')
+        
         return album
-
     def update_album(self, pk, data):
         album = self.get_album(pk)
+        if not album:
+            raise NotFoundException('Album not found')
+        
         for key, value in data.items():
             setattr(album, key, value)
         album.save()
+        
         return album
-
     def delete_album(self, pk):
         album = self.get_album(pk)
-        album.delete()
-
-    def create_album(self, data):
-        return Album.objects.create(**data)
-   
-    def get_album_by_id(self, pk):
-        album = Album.objects.filter(pk=pk).first()
         if not album:
-            raise NotFoundException("Album not found")
+            raise NotFoundException('Album not found')
+        
+        album.delete()
+    def create_album(self, data):
+        album = Album.objects.create(**data)
         return album
+    def get_albums_by_artist(self, artist_id):
+        albums = Album.objects.filter(artist_id=artist_id)
+        if not albums:
+            raise NotFoundException('No albums found for this artist')
+        
+        return albums
+    def add_song_to_album(self, album_id, song_id):
+        album = self.get_album(album_id)
+        if not album:
+            raise NotFoundException('Album not found')
+        
+        song = self.get_song(song_id)
+        if not song:
+            raise NotFoundException('Song not found')
+        if self.model_AlbumSong_class.objects.filter(album=album, song=song).exists():
+            raise NotFoundException('Bài hát đã có trong album!')
+        album_song = self.model_AlbumSong_class.objects.create(album=album, song=song)
+        return {'message': 'Bài hát đã được thêm vào album!'}
+
+    def remove_song_from_album(self, album_id, song_id):
+        album = self.get_album(album_id)
+        if not album:
+            raise NotFoundException('Album not found')
+        
+        song = self.get_song(song_id)
+        if not song:
+            raise NotFoundException('Song not found')
+        
+        album_song = self.model_AlbumSong_class.objects.filter(album=album, song=song).first()
+        if not album_song:
+            raise NotFoundException('Song not found in this album')
+        
+        album_song.delete()
+        return {'message': 'Bài hát đã được xóa khỏi album!'}
+    def get_song_in_album(self, album_id):
+        album = self.get_album(album_id)
+        if not album:
+            raise NotFoundException('Album not found')
+        
+        songs = self.model_AlbumSong_class.objects.filter(album=album).select_related('song')
+        return songs
+    

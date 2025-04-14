@@ -42,7 +42,6 @@ class SongViewSet(viewsets.ViewSet):
         song = self.s_service.get_song(pk);
         return ApiResponse.build(data=SongSerializer(song).data)
 
-    @action(methods=['post'], detail=False, url_path='create')
     def create(self, request):
         serializer = SongCreateRequestSerializer(data=request.data)
 

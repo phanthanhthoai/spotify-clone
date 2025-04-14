@@ -2,15 +2,12 @@ from apps.artists.models import Artist
 from utils.exceptions import NotFoundException
 from apps.artists.filters import ArtistFilter
 from apps.artists.models import Artist
+from apps.base_service import BaseService
 
 
-
-class ArtistService:
-     def get_list_artist(self, request):
-          queryset = Artist.objects.all()
-          filter = ArtistFilter(request, queryset=queryset)
-          
-          return filter.qs
+class ArtistService(BaseService):
+     filter_class = ArtistFilter
+     model_class = Artist
      
      def get_artist(self, pk):
           artist = Artist.objects.filter(pk=pk).first()
