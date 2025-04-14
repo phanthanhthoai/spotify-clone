@@ -18,11 +18,19 @@ class AuthViewSet(ViewSet):
      def __init__(self, *args, **kwargs):
           super().__init__(*args, **kwargs)
           self.auth_service = AuthService()
-          
+
+     def get_authenticators(self):
+          if (self.request.method == "POST"):
+               return []
+
+          return super().get_authenticators()
+
+
      @action(methods=['get'], detail=False, url_path='user', permission_classes=[IsAuthenticated])
      def authenticated_user(self, request):
           user = request.user
           return Response({"id":user.id,"username": user.username, "email": user.email})
+
      @action(methods=['post'], detail=False, url_path='register')
      def register(self, request):
           serializer = RegisterRequestSerializer(data=request.data)
