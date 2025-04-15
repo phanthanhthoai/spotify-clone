@@ -66,21 +66,19 @@ class AlbumViewSet(ViewSet):
     
     
     @action(detail=True, methods=['post'], url_path='add-song/(?P<song_id>\d+)')
-    def add_song_to_album(self, request, album_id, song_id):
+    def add_song_to_album(self, request, pk=None, song_id=None):
         try:
-            album = self.album_service.get_album(album_id)
-            song = self.song_service.get_song(song_id)
-            return ApiResponse.build(data=AlbumSongSerializer(album).data)
+            album_song = self.album_service.add_song_to_album(pk, song_id)
+            return album_song
         except NotFoundException as e:
             return ApiResponse.build(message=str(e), status=status.HTTP_404_NOT_FOUND)
         
         
     @action(detail=True, methods=['post'], url_path='remove-song/(?P<song_id>\d+)')
-    def remove_song_from_album(self, request, album_id, song_id):
+    def remove_song_from_album(self, request, pk=None, song_id=None):
         try:
-            album = self.album_service.get_album(album_id)
-            song = self.song_service.get_song(song_id)
-            return ApiResponse.build(data=AlbumSongSerializer(album).data)
+            album_song = self.album_service.remove_song_from_album(pk, song_id)
+            return album_song
         except NotFoundException as e:
             return ApiResponse.build(message=str(e), status=status.HTTP_404_NOT_FOUND)
     

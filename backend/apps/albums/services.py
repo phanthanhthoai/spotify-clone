@@ -2,12 +2,16 @@ from apps.albums.models import Album, AlbumSong
 from utils.exceptions import NotFoundException
 from apps.albums.filters import AlbumFilter
 from apps.base_service  import BaseService
+from apps.songs.models import Song
+from rest_framework.response import Response
 
 class AlbumService(BaseService):
     
     model_class = Album
     filter_class = AlbumFilter
     model_AlbumSong_class = AlbumSong
+    model_Song_class = Song
+    
     def get_album(self, pk):
         album = Album.objects.filter(pk=pk).first()
         if not album:
@@ -44,20 +48,20 @@ class AlbumService(BaseService):
         if not album:
             raise NotFoundException('Album not found')
         
-        song = self.get_song(song_id)
+        song = self.model_Song_class.objects.filter(id=song_id).first()
         if not song:
             raise NotFoundException('Song not found')
         if self.model_AlbumSong_class.objects.filter(album=album, song=song).exists():
             raise NotFoundException('Bài hát đã có trong album!')
         album_song = self.model_AlbumSong_class.objects.create(album=album, song=song)
-        return {'message': 'Bài hát đã được thêm vào album!'}
+        return Response ({'message':'Bài hát đã được thêm vào album!'})
 
     def remove_song_from_album(self, album_id, song_id):
         album = self.get_album(album_id)
         if not album:
             raise NotFoundException('Album not found')
         
-        song = self.get_song(song_id)
+        song = self.model_Song_class.objects.filter(id=song_id).first()
         if not song:
             raise NotFoundException('Song not found')
         
@@ -66,7 +70,7 @@ class AlbumService(BaseService):
             raise NotFoundException('Song not found in this album')
         
         album_song.delete()
-        return {'message': 'Bài hát đã được xóa khỏi album!'}
+        return Response({'message': 'Bài hát đã được xóa khỏi album!'})
     def get_song_in_album(self, album_id):
         album = self.get_album(album_id)
         if not album:

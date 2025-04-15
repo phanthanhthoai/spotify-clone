@@ -3,6 +3,7 @@ from .models import Playlist, PlaylistSong
 from apps.songs.models import Song
 from apps.base_service import BaseService
 from .filters import PlaylistFilter
+from rest_framework.response import Response
 class PlaylistService(BaseService):
     filter_class = PlaylistFilter
     model_class = Playlist
@@ -45,7 +46,7 @@ class PlaylistService(BaseService):
             return {"message": "Bài hát đã có trong playlist!"}
         
         PlaylistSong.objects.create(playlist=playlist, song=song)
-        return {"message": "Bài hát đã được thêm vào playlist!"}
+        return Response ({"message": "Bài hát đã được thêm vào playlist!"})
 
     def remove_song_from_playlist(self, playlist_id, song_id):
         playlist = get_object_or_404(Playlist, id=playlist_id)
@@ -53,4 +54,4 @@ class PlaylistService(BaseService):
         
         playlist_song = get_object_or_404(PlaylistSong, playlist=playlist, song=song)
         playlist_song.delete()
-        return {"message": "Bài hát đã được xóa khỏi playlist!"}
+        return Response({"message": "Bài hát đã được xóa khỏi playlist!"})
