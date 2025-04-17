@@ -4,8 +4,9 @@ from rest_framework.decorators import action
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from apps.authentications.services import AuthService
-from apps.authentications.serializers import LoginRequestSerializer, RegisterRequestSerializer
+from apps.authentications.serializers import LoginRequestSerializer, RegisterRequestSerializer, ProfileUserSerializer
 from apps.users.serializers import UserSerializer
+from apps.users.services import UserService
 from utils.api_response import ApiResponse
 from utils.exceptions import NotFoundException, ValidationException
 from rest_framework.permissions import IsAuthenticated
@@ -19,6 +20,7 @@ class AuthViewSet(ViewSet):
      def __init__(self, *args, **kwargs):
           super().__init__(*args, **kwargs)
           self.auth_service = AuthService()
+          self.user_service = UserService()
 
      def get_authenticators(self):
           if (self.request.method == "POST"):
@@ -50,6 +52,12 @@ class AuthViewSet(ViewSet):
           
           token = self.auth_service.login(serializer.validated_data)
           return ApiResponse.build(data={'token': token})
+
+     def profile(self, request):
+          user_id = request.user.id
+          user = self.user_service.get_user(user_id)
+
+          return ApiResponse.build(data=ProfileUserSerializer(user).data)
           
           
      

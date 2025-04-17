@@ -143,11 +143,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'spotifyclone',  # Đặt tên database MySQL của bạn
+        'NAME': 'spotify_clone',  # Đặt tên database MySQL của bạn
         'USER': 'root',  # User của MySQL
         'PASSWORD': '123456',  # Mật khẩu MySQL
         'HOST': 'localhost',  # Hoặc IP của máy chủ MySQL
-        'PORT': '3306',  # Cổng MySQL mặc định
+        'PORT': '3307',  # Cổng MySQL mặc định
     }
 }
 

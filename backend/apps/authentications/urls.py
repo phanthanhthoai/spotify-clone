@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.routers import DefaultRouter
 from .views import AuthViewSet
 from django.urls import path, include
@@ -11,5 +12,7 @@ urlpatterns = [
 
      path('/login', AuthViewSet.as_view({'post': 'login'})),
 
-     path('/register', AuthViewSet.as_view({'post': 'register'}))
+     path('/register', AuthViewSet.as_view({'post': 'register'})),
+
+     path('/profile', AuthViewSet.as_view({'get': 'profile'}, authenticated_user=True, permission_classes=[IsAuthenticated])),
 ]
