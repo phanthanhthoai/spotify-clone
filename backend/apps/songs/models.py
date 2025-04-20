@@ -11,7 +11,7 @@ class Song(BaseModel):
      release_date = models.DateField()
      duration = models.PositiveIntegerField()
      file = models.FileField(upload_to='songs/')
-     image = models.FileField(upload_to='songs/image/',null=True)
+     image = models.ImageField(upload_to='songs/image/',null=True)
      
      class Meta:
           db_table = 'song'

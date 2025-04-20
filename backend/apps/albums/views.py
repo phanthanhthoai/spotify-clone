@@ -55,7 +55,7 @@ class AlbumViewSet(ViewSet):
             context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
-        album = self.album_service.create_album(serializer.validated_data)
+        album = self.album_service.create_album(serializer.validated_data, request.user)
         return ApiResponse.build(data=AlbumSerializer(album).data)
     
     

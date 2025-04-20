@@ -34,7 +34,8 @@ class AlbumService(BaseService):
             raise NotFoundException('Album not found')
         
         album.delete()
-    def create_album(self, data):
+    def create_album(self, data, user):
+        data['user'] = user
         album = Album.objects.create(**data)
         return album
     def get_albums_by_artist(self, artist_id):
