@@ -27,7 +27,7 @@ class PaginatedResponse:
         serialize = serialize_class(self.data, many=True)
 
         return {
-            'list': serialize.data,
+            'items': serialize.data,
             'page': self.pagination.page.number,
             'size': self.pagination.page.paginator.per_page,
             'totalElements': self.pagination.page.paginator.count,
