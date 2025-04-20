@@ -37,10 +37,14 @@ class AppAuthentication(JWTAuthentication):
     def authenticate(self, request):
         from apps.authentications.models import UserSession
 
-        result = super().authenticate(request)
-        user, token = result
 
+        result = super().authenticate(request)
+        if result is None:
+            return None
+
+        user, token = result
         session = UserSession.objects.filter(token=token, user__id=user.id).first()
+
         if session is None:
             return None
 
