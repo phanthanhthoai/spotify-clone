@@ -24,10 +24,13 @@ class AuthMiddleware:
     def __call__(self, request):
         auth = request.headers.get('Authorization', None)
 
-        if auth is not None:
+        try:
             jwt_auth = JWTAuthentication()
-            user,  _ = jwt_auth.authenticate(request)
+            user, _ = jwt_auth.authenticate(request)
             set_current_user(user)
+        except Exception:
+            pass
+
 
         response = self.get_response(request)
         clear_current_user()
