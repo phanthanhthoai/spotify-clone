@@ -1,9 +1,7 @@
 @use "custom_variable";
 @use "tailwindcss";
 
-@for $i from 1 through 100 {
-  $v: $i * 5;
-
+@for $v from 1 through 500 {
   //define width class
   .w-#{$v}px    { width: $v + px !important; }
 

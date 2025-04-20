@@ -1,7 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
+const songTemp = {
+    title: "Tháp Drill Tự do",
+    artist: "MCK",
+    file: "src/assets/tháp_drill_tự_do_-_mck_prod_gaz.mp3",
+    image: "src/assets/mck.jpeg"
+}
 
 const initialState = {
-    songId: null
+    songId: null,
+    song: songTemp,
+    isPlaying: false
 }
 
 export const currentSongSlice = createSlice({

@@ -18,3 +18,32 @@ body {
   color: white;
   font-size: 14px;
 }
+
+.spotify-icon-button {
+  &:hover {
+    stroke-width: 2.3 !important;
+  }
+}
+
+.spotify-progress {
+  cursor: pointer;
+
+  &:hover {
+    .bar {
+      background-color: #1fd760 !important;
+      transition: 0.2s all ease-in-out;
+
+      &::after {
+        content: "";
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
