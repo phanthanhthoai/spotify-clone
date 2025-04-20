@@ -39,17 +39,15 @@ class SongViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        song = self.s_service.get_song(pk);
+        song = self.s_service.get_song(pk)
         return ApiResponse.build(data=SongSerializer(song).data)
 
     def create(self, request):
-        serializer = SongCreateRequestSerializer(data=request.data)
-
+        serializer = SongCreateRequestSerializer(data=request.data, context={'request': request})
         if not serializer.is_valid():
             raise ValidationException(serializer.errors)
-
-        return ApiResponse.build(SongSerializer(self.s_service.create_song(serializer.data)).data)
-    
+        song = self.s_service.create_song(serializer.validated_data)
+        return ApiResponse.build(SongCreateRequestSerializer(song).data)
 
     @action(methods=['put'], detail=True, url_path='update')
     def update(self, request, pk=None):
@@ -57,7 +55,7 @@ class SongViewSet(viewsets.ViewSet):
         if not serializer.is_valid():
             raise ValidationException(serializer.errors)
 
-        return ApiResponse.build(SongSerializer(self.s_service.update_song(pk, serializer.data)).data)
+        return ApiResponse.build(SongUpdateRequestSerializer(self.s_service.update_song(pk, serializer.data)).data)
 
     def destroy(self, request, pk=None):
         result = self.s_service.delete_song(pk)
