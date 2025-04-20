@@ -7,7 +7,7 @@ const songService = {
      },
 
      getSongById: async (id) => {
-          const rawResponse = await axiosInstance.get(`/song/${id}/`);
+          const rawResponse = await axiosInstance.get(`/song/${id}`);
           return rawResponse.data;
      },
 
@@ -24,5 +24,12 @@ const songService = {
      deleteSong: async (id) => {
           const rawResponse = await axiosInstance.delete(`/song/${id}/`);
           return rawResponse.data;
+     },
+
+     getListSong: async () => {
+          const rawResponse = await axiosInstance.get("/song?page=1&size=20");
+          return rawResponse.data;
      }
 }
+
+export default songService;

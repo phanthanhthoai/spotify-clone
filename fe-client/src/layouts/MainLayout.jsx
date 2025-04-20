@@ -26,7 +26,7 @@ export default function MainLayout() {
     }, []);
 
     return (
-        <div className="w-full h-screen bg-sky-100 flex flex-col">
+        <div className="w-full h-screen bg-sky-100 flex flex-col justify-start">
             <Header></Header>
             <div className="flex grow gap-2 bg-black app-container">
                 <div className="w-1/5 h-full bg-sky-300 part-layout">

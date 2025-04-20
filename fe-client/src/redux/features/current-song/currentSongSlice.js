@@ -1,15 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
-const songTemp = {
-    title: "Tháp Drill Tự do",
-    artist: "MCK",
-    file: "src/assets/tháp_drill_tự_do_-_mck_prod_gaz.mp3",
-    image: "src/assets/mck.jpeg"
+const songInit = {
+    id: -1,
+    title: "",
+    artist: "",
+    genre: "",
+    release_date: "",
+    duration: 240,
+    file: "",
+    image: ""
 }
 
 const initialState = {
     songId: null,
-    song: songTemp,
-    isPlaying: false
+    song: songInit,
+    isPlaying: false,
+    currentTime: 0,
+    duration: 90
 }
 
 export const currentSongSlice = createSlice({
@@ -24,8 +30,16 @@ export const currentSongSlice = createSlice({
             state.songId = null;
         },
 
+        updateTime: (state, payload) => {
+            state.currentTime = payload.payload;
+        },
+
+        selectSong: (state, payload) => {
+            state.song = payload.payload;
+        }
+
     }
 })
 
-export const {play, stop} = currentSongSlice.actions;
+export const {play, stop, updateTime, selectSong} = currentSongSlice.actions;
 export default currentSongSlice.reducer;
