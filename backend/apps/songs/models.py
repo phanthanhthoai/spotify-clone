@@ -1,6 +1,9 @@
 from apps.albums.models import Album
-from utils.models import BaseModel
 from django.db import models
+
+from apps.base_model import BaseModel
+
+
 # from apps.playlists.models import Playlist
 
 class Song(BaseModel):

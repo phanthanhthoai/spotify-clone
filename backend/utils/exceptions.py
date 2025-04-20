@@ -1,3 +1,5 @@
+from rest_framework.exceptions import APIException
+
 class NotFoundException(Exception):
     def __init__(self, message):
         self.message = message
@@ -8,7 +10,7 @@ class ValidationException(Exception):
         self.message = message
         super().__init__(self.message)
         
-class UnauthorizedException(Exception):
+class UnauthorizedException(APIException):
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)

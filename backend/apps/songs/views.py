@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework_simplejwt import authentication
 
 from utils.api_response import ApiResponse
 from utils.exceptions import ValidationException
@@ -20,6 +21,7 @@ class SongViewSet(viewsets.ViewSet):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
     permission_classes = [permissions.AllowAny]
+    authentication_classes = [authentication.JWTAuthentication]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_class = SongFilter
     search_fields = ['title', 'artist']

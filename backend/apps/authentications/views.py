@@ -13,6 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
+from utils.middlewares import AppAuthentication
 
 
 class AuthViewSet(ViewSet):
@@ -29,7 +30,7 @@ class AuthViewSet(ViewSet):
           return super().get_authenticators()
 
 
-     @action(methods=['get'], detail=False, url_path='user', authentication_classes=[JWTAuthentication], permission_classes=[IsAuthenticated])
+     @action(methods=['get'], detail=False, url_path='user', authentication_classes=[AppAuthentication], permission_classes=[IsAuthenticated])
      def authenticated_user(self, request):
           user = request.user
           return Response({"id":user.id,"username": user.username, "email": user.email})

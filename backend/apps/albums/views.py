@@ -14,8 +14,11 @@ from utils.api_response import ApiResponse
 from utils.exceptions import NotFoundException
 from rest_framework.viewsets import ViewSet
 from apps.songs.services import SongService
+from utils.middlewares import AppAuthentication
+
+
 class AlbumViewSet(ViewSet):
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [AppAuthentication]
     permission_classes = [IsAuthenticated]
     
     

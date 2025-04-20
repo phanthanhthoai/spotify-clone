@@ -1,5 +1,5 @@
 from utils.api_response import ApiResponse
-from utils.exceptions import LogicException, NotFoundException, ValidationException
+from utils.exceptions import LogicException, NotFoundException, ValidationException, UnauthorizedException
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.exceptions import NotAuthenticated
 
@@ -15,5 +15,8 @@ def custom_exception_handler(exc, context):
     
     if isinstance(exc, ValidationException):
          return ApiResponse.build(message=str(exc), status=402)
+
+    if isinstance(exc, UnauthorizedException):
+        return ApiResponse.build(message="Unauthorized", status=401)
 
     return ApiResponse.build(message="Internal server error", status=500, errors=str(exc))

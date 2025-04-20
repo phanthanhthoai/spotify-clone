@@ -40,6 +40,7 @@ class SongService(BaseService):
           song.delete()
           
      def create_song(self, data):
-          song = Song.objects.create(**data)
+          song = Song(**data)
+          song.save()
           return song
           

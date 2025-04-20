@@ -7,8 +7,11 @@ from rest_framework.decorators import action
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from utils.middlewares import AppAuthentication
+
+
 class UserViewSet(ViewSet):
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [AppAuthentication]
     permission_classes = [IsAuthenticated]
 
     def __init__(self, *args, **kwargs):

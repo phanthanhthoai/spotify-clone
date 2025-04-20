@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from apps.playlists.models import Playlist
 from apps.songs.models import Song
+from utils.middlewares import AppAuthentication
 from .serializers import PlaylistSerializer, PlaylistCreateRequestSerializer, PlaylistUpdateRequestSerializer, PlaylistSongSerializer
 from rest_framework import status
 from apps.songs.serializers import SongSerializer
@@ -13,7 +14,7 @@ from utils.api_response import ApiResponse
 from .services import PlaylistService
 
 class PlaylistViewSet(viewsets.ModelViewSet):
-     authentication_classes = [JWTAuthentication]
+     authentication_classes = [AppAuthentication]
      permission_classes = [permissions.IsAuthenticated]
 
      def __init__(self, *args, **kwargs):

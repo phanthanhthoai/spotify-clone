@@ -29,7 +29,7 @@ class AuthService:
           
           token = AccessToken.for_user(user)
           
-          user_session = UserSession.objects.create(
+          UserSession.objects.create(
                user=user,
                token=str(token),
                # expired_at=datetime.datetime.now() + datetime.timedelta(days=1)
@@ -37,3 +37,6 @@ class AuthService:
           )
           
           return str(token)
+
+     def getByToken(self, token):
+          return UserSession.objects.filter(token=token).first()
