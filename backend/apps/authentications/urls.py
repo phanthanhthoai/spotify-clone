@@ -16,6 +16,8 @@ urlpatterns = [
      path('/login', AuthViewSet.as_view({'post': 'login'})),
 
      path('/register', AuthViewSet.as_view({'post': 'register'})),
+     
+     path('/logout',AuthViewSet.as_view({'post':'logout'})),
 
      path('/profile', AuthViewSet.as_view({'get': 'profile'}, authentication_classes = [AppAuthentication], permission_classes = [IsAuthenticated])),
 ]

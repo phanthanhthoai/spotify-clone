@@ -2,6 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {play, selectSong, stop} from "../../redux/features/current-song/currentSongSlice.js";
 import songService from "../../api/songService.js";
 import SongSlider from "./SongSlider.jsx";
+import AlbumSlider from "./AlbumSlider.jsx";
+import ArtistSlider from "./ArtistSlider.jsx";
 import {Button} from "@chakra-ui/react";
 
 export default function Home() {
@@ -26,6 +28,8 @@ export default function Home() {
         <div className="flex p-7  h-full">
             <div className="w-full">
                 <div className="text-2xl font-bold">Đề xuất cho bạn</div>
+                <AlbumSlider/>
+                <ArtistSlider/>
                 <SongSlider/>
             </div>
         </div>

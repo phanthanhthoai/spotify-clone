@@ -26,3 +26,5 @@ const albumService = {
           return rawResponse.data;
      }
 }
+
+export default albumService;

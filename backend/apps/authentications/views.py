@@ -59,6 +59,11 @@ class AuthViewSet(ViewSet):
           user = self.user_service.get_user(user_id)
 
           return ApiResponse.build(data=ProfileUserSerializer(user).data)
-          
+     
+     
+     @action(methods=['post'], detail=False, url_path='logout', authentication_classes=[AppAuthentication], permission_classes=[IsAuthenticated])
+     def logout(self, request):
+          delete = self.auth_service.logout()
+          return ApiResponse.build(message='Logout successfully!')
           
      

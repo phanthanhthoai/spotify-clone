@@ -4,6 +4,7 @@ from apps.authentications.models import UserSession
 from utils.exceptions import LogicException, NotFoundException
 from rest_framework_simplejwt.tokens import AccessToken
 from django.utils import timezone
+from utils.middlewares import get_current_user
 
 class AuthService:
      def register(self, data):
@@ -40,3 +41,7 @@ class AuthService:
 
      def getByToken(self, token):
           return UserSession.objects.filter(token=token).first()
+     def logout(self,request):
+          user = get_current_user()
+          UserSession.objects.filter(user=user).delete()
+          return True

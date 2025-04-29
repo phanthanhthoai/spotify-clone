@@ -3,6 +3,8 @@ import {BellRing, House, User} from "lucide-react";
 import HeaderSearchBar from "./HeaderSearchBar.jsx";
 import {IconButton} from "@chakra-ui/react";
 import SpotifyIconButton from "../../components/SpotifyIconButton.jsx";
+import UserMenu from "./UserMenu.jsx";
+
 export default function Header() {
     return (
         <div className="header-layout flex items-center">
@@ -19,7 +21,8 @@ export default function Header() {
             <div className="flex gap-5 items-center justify-end">
                 <SpotifyIconButton name="BellRing" tooltip="Thông báo"/>
                 <div className="header-avatar !p-1 rounded-full">
-                    <User className="w-20px h-20px"/>
+                    {/* <User className="w-20px h-20px"/> */}
+                    <UserMenu/>
                 </div>
             </div>
         </div>

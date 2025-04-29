@@ -1,5 +1,6 @@
 import axiosInstance from "./axiosInstance.js";
 
+
 const authService = {
     login: async (data) => {
         const rawResponse = await axiosInstance.post("/auth/login", data);
@@ -12,9 +13,14 @@ const authService = {
     },
 
     profile: async () => {
-        const rawResponse = await axiosInstance.get("auth/profile");
+        const rawResponse = await axiosInstance.get("/auth/profile");
         return rawResponse.data;
-    }
+    },
+
+    logout: async () => {
+        const rawResponse = await axiosInstance.post("/auth/logout");
+        return rawResponse.data;
+    },
 }
 
 export default authService;
