@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -21,12 +21,12 @@ export default function SongSlider() {
     }, []);
 
     const settings = {
-        dots: true,
+        draggable: false,
         infinite: false, // Đổi thành false nếu ít item
         speed: 500,
         slidesToShow: 5, // Nên để số lớn hơn 2
         slidesToScroll: 1,
-        arrows: true,
+        arrows: false,
         responsive: [
             {
                 breakpoint: 1200,
@@ -48,11 +48,11 @@ export default function SongSlider() {
     };
 
     return (
-        <div className="slider-container" style={{ width: "1000px", margin: "0 auto"}}>
+        <div className="slider-container" style={{ width: "1000px"}}>
             {listSong.length > 0 && (
                 <Slider {...settings} ref={sliderRef}>
                     {listSong.map((song) => (
-                        <div key={song.id} className="slick-slide-item">
+                        <div key={song.id} className="slick-slide-item slide-item">
                             <SongItem song={song} />
                         </div>
                     ))}

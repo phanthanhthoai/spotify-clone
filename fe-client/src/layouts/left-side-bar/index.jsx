@@ -28,7 +28,7 @@ export function LeftSideBar() {
 
     return (
         <div className="left-sidebar p-5">
-            <Button onClick={() => onClickToggle()}>Toggle right side bar</Button>
+            {/*<Button onClick={() => onClickToggle()}>Toggle right side bar</Button>*/}
             <div className="flex items-center">
                 <div className="grow font-bold">Thư viện</div>
                 <div>

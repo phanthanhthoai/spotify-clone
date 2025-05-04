@@ -41,7 +41,7 @@ class AuthService:
 
      def getByToken(self, token):
           return UserSession.objects.filter(token=token).first()
+
      def logout(self,request):
-          user = get_current_user()
-          UserSession.objects.filter(user=user).delete()
+          UserSession.objects.filter(token=request.token).delete()
           return True

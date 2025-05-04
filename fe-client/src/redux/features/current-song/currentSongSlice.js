@@ -23,11 +23,11 @@ export const currentSongSlice = createSlice({
     initialState,
     reducers: {
         play: (state) => {
-            state.songId = 1
+            state.isPlaying = true;
         },
 
         stop: (state) => {
-            state.songId = null;
+            state.isPlaying = false;
         },
 
         updateTime: (state, payload) => {
@@ -36,10 +36,15 @@ export const currentSongSlice = createSlice({
 
         selectSong: (state, payload) => {
             state.song = payload.payload;
+            state.isPlaying = true;
+        },
+
+        pause: (state) => {
+            state.isPlaying = false;
         }
 
     }
 })
 
-export const {play, stop, updateTime, selectSong} = currentSongSlice.actions;
+export const {play, stop, updateTime, selectSong, pause} = currentSongSlice.actions;
 export default currentSongSlice.reducer;
