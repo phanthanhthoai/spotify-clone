@@ -33,7 +33,11 @@ export function LeftSideBar() {
 
     return (
         <div className="left-sidebar p-5">
+<<<<<<< HEAD
             {/* <Button onClick={() => onClickToggle()}>Toggle right side bar</Button> */}
+=======
+            {/*<Button onClick={() => onClickToggle()}>Toggle right side bar</Button>*/}
+>>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
             <div className="flex items-center">
                 <div className="grow font-bold">Thư viện</div>
                 <div>

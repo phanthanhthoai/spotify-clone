@@ -18,17 +18,17 @@
 .slick-next {
   right: -40px;
 }
-.slick-slide-item {
-  padding: 10px;
-  box-sizing: border-box;
-}
+/*.slick-slide-item {*/
+/*  padding: 10px;*/
+/*  box-sizing: border-box;*/
+/*}*/
 
-.slick-slide-item > div {
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  padding: 12px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/*.slick-slide-item > div {*/
+/*  background-color: #1e1e1e;*/
+/*  border-radius: 8px;*/
+/*  padding: 12px;*/
+/*  height: 250px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*}*/

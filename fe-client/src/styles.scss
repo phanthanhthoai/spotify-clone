@@ -48,9 +48,71 @@ body {
   }
 }
 
+
+.spotify-range {
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 4px;
+  border-radius: 10px;
+  appearance: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+}
+
 .spotify-item {
-  height: 320px;
   width: 180px;
   border-radius: 6px;
   overflow: hidden;
+  padding: 12px;
+  transition: all 0.15s ease-in-out;
+
+  .button-play-item {
+    opacity: 0;
+    transform: translateY(10px) scale(1);
+    position: absolute;
+  }
+
+  &:hover {
+    background-color: #1e1e1e;
+
+    .button-play-item {
+      opacity: 1;
+      transform: translateY(0);
+
+      &:hover {
+        background-color: #3edf77;
+        transform: scale(1.08);
+      }
+    }
+  }
+}
+
+.slider-container {
+
+}
+
+.button-play-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #1fd760;
+  right: 5px;
+  bottom: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.slick-track {
+  margin: 0 !important;
 }

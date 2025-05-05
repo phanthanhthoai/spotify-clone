@@ -11,13 +11,11 @@ router.register('', AuthViewSet, basename='auth')
 
 
 urlpatterns = [
-     path('/user', AuthViewSet.as_view({'get' : 'authenticated_user'})),
+     path('/login', AuthViewSet.as_view({'post': 'login'}, authentication_classes = [])),
 
-     path('/login', AuthViewSet.as_view({'post': 'login'})),
-
-     path('/register', AuthViewSet.as_view({'post': 'register'})),
+     path('/register', AuthViewSet.as_view({'post': 'register'}, authentication_classes = [])),
      
-     path('/logout',AuthViewSet.as_view({'post':'logout'})),
+     path('/logout',AuthViewSet.as_view({'post':'logout'}, authentication_classes = [AppAuthentication], permission_classes = [IsAuthenticated])),
 
      path('/profile', AuthViewSet.as_view({'get': 'profile'}, authentication_classes = [AppAuthentication], permission_classes = [IsAuthenticated])),
 ]

@@ -1,31 +1,13 @@
 import SpotifyBackgroundIconButton from "./SpotifyBackgroundIconButton.jsx";
 import SpotifyIconButton from "./SpotifyIconButton.jsx";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateTime } from "../redux/features/current-song/currentSongSlice.js";
+// <<<<<<< HEAD
+import { useSelector } from "react-redux";
+// =======
+// >>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
 
-export default function SongController() {
+export default function SongController({audioRef, onChangeTime, toggle}) {
     const currentSong = useSelector(state => state.currentSong.song);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(null);
-    const dispatch = useDispatch();
-
-    const toggle = () => {
-        setIsPlaying(!isPlaying);
-    }
-
-    useEffect(() => {
-        if (isPlaying) {
-            audioRef.current?.play();
-            return;
-        }
-
-        audioRef.current?.pause();
-    }, [isPlaying]);
-
-    const onChangeTime = () => {
-        dispatch(updateTime(audioRef.current.currentTime));
-    }
+    const isPlaying = useSelector(state => state.currentSong.isPlaying);
 
     return (
         <div className="flex gap-3 justify-center items-center">

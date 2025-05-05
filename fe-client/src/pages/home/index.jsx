@@ -26,6 +26,7 @@ export default function Home() {
     return (
         <div className="flex p-7  h-full">
             <div className="w-full">
+<<<<<<< HEAD
                 <div className="text-2xl font-bold">Đề xuất cho bạn</div>
                 <br />
                 <div className="text-2xl font-bold">Album</div>
@@ -33,6 +34,11 @@ export default function Home() {
                 <div className="text-2xl font-bold">Nghệ sĩ</div>
                 <ArtistSlider/>
                 <div className="text-2xl font-bold">Bài hát</div>
+=======
+                <div className="text-2xl font-bold mb-1">Đề xuất cho bạn</div>
+                {/*<AlbumSlider/>*/}
+                {/*<ArtistSlider/>*/}
+>>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
                 <SongSlider/>
             </div>
         </div>
