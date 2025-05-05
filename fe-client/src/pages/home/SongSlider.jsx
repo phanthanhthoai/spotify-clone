@@ -24,31 +24,39 @@ export default function SongSlider() {
         dots: true,
         infinite: false, // Đổi thành false nếu ít item
         speed: 500,
-        slidesToShow: 5, // Nên để số lớn hơn 2
+        slidesToShow: 4, // Nên để số lớn hơn 2
         slidesToScroll: 1,
         arrows: true,
         responsive: [
             {
-                breakpoint: 1200,
+                breakpoint: 1200, // Khi nhỏ hơn 1200px
                 settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 3,
-                    arrows: true // Thêm dòng này
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    arrows: true
                 }
             },
             {
-                breakpoint: 992,
+                breakpoint: 900,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 2,
-                    arrows: true // Thêm dòng này
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: true
                 }
             }
         ]
     };
-
+    // style={{width:"1001px" , margin: "0 auto"}
     return (
-        <div className="slider-container" style={{ width: "1000px", margin: "0 auto"}}>
+        <div className="slider-container max-w-full md:max-w-[1000px] mx-auto px-4">
             {listSong.length > 0 && (
                 <Slider {...settings} ref={sliderRef}>
                     {listSong.map((song) => (

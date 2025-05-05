@@ -4,6 +4,7 @@ import Login from "./layouts/auth-layout/Login.jsx";
 import Register from "./layouts/auth-layout/Register.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import Album from "./pages/album/index.jsx";
+import CreatePlaylist from "./pages/createplaylist/index.jsx";
 import Home from "./pages/home/index.jsx";
 import PlayList from "./pages/playlist/index.jsx";
 
@@ -19,6 +20,7 @@ function App() {
                     <Route index element={<Home />}></Route>
                     <Route path="playlist" element={<PlayList />}></Route>
                     <Route path="album" element={<Album />}></Route>
+                    <Route path="createPlaylist" element={<CreatePlaylist />}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -1,10 +1,9 @@
-import {useDispatch, useSelector} from "react-redux";
-import {play, selectSong, stop} from "../../redux/features/current-song/currentSongSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 import songService from "../../api/songService.js";
-import SongSlider from "./SongSlider.jsx";
+import { play, selectSong, stop } from "../../redux/features/current-song/currentSongSlice.js";
 import AlbumSlider from "./AlbumSlider.jsx";
 import ArtistSlider from "./ArtistSlider.jsx";
-import {Button} from "@chakra-ui/react";
+import SongSlider from "./SongSlider.jsx";
 
 export default function Home() {
     const songId = useSelector((state) => state.currentSong.songId);
@@ -28,8 +27,12 @@ export default function Home() {
         <div className="flex p-7  h-full">
             <div className="w-full">
                 <div className="text-2xl font-bold">Đề xuất cho bạn</div>
+                <br />
+                <div className="text-2xl font-bold">Album</div>
                 <AlbumSlider/>
+                <div className="text-2xl font-bold">Nghệ sĩ</div>
                 <ArtistSlider/>
+                <div className="text-2xl font-bold">Bài hát</div>
                 <SongSlider/>
             </div>
         </div>

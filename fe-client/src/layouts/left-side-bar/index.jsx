@@ -1,15 +1,20 @@
 import { Button } from "@chakra-ui/react";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {play, selectSong, stop} from "../../redux/features/current-song/currentSongSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import songService from "../../api/songService.js";
+import { play, selectSong, stop } from "../../redux/features/current-song/currentSongSlice.js";
 
 export function LeftSideBar() {
     const [active, setActive] = useState("playlist");
     const songId = useSelector((state) => state.currentSong.songId);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/createPlaylist');
+    };
 
     const onClickToggle = async () => {
         if (songId) {
@@ -28,11 +33,11 @@ export function LeftSideBar() {
 
     return (
         <div className="left-sidebar p-5">
-            <Button onClick={() => onClickToggle()}>Toggle right side bar</Button>
+            {/* <Button onClick={() => onClickToggle()}>Toggle right side bar</Button> */}
             <div className="flex items-center">
                 <div className="grow font-bold">Thư viện</div>
                 <div>
-                    <Button className="button-dark">
+                    <Button className="button-dark" onClick={handleClick}>
                         <Plus />
                         <span className="font-bold">Tạo</span>
                     </Button>

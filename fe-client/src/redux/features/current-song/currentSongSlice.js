@@ -36,10 +36,14 @@ export const currentSongSlice = createSlice({
 
         selectSong: (state, payload) => {
             state.song = payload.payload;
+            state.songId = payload.payload.id;
+            state.duration = payload.payload.duration;
+            state.currentTime = 0;
+            state.isPlaying = true;
         }
 
     }
 })
 
-export const {play, stop, updateTime, selectSong} = currentSongSlice.actions;
+export const { play, stop, updateTime, selectSong } = currentSongSlice.actions;
 export default currentSongSlice.reducer;

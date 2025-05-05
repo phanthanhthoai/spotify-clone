@@ -1,8 +1,8 @@
 import SpotifyBackgroundIconButton from "./SpotifyBackgroundIconButton.jsx";
 import SpotifyIconButton from "./SpotifyIconButton.jsx";
-import {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {updateTime} from "../redux/features/current-song/currentSongSlice.js";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTime } from "../redux/features/current-song/currentSongSlice.js";
 
 export default function SongController() {
     const currentSong = useSelector(state => state.currentSong.song);
@@ -29,16 +29,16 @@ export default function SongController() {
 
     return (
         <div className="flex gap-3 justify-center items-center">
-            <audio ref={audioRef} src={`http://127.0.0.1:8000/${currentSong.file}`} onTimeUpdate={onChangeTime}/>
+            <audio ref={audioRef} src={`http://127.0.0.1:8000/${currentSong.file}`} onTimeUpdate={onChangeTime} />
 
-            <SpotifyIconButton name="SkipBack"/>
+            <SpotifyIconButton name="SkipBack" />
 
             <div onClick={toggle}>
                 <SpotifyBackgroundIconButton name={isPlaying ? 'Pause' : 'Play'}
-                                             tooltip="Phát"></SpotifyBackgroundIconButton>
+                    tooltip="Phát"></SpotifyBackgroundIconButton>
             </div>
 
-            <SpotifyIconButton name="SkipForward"/>
+            <SpotifyIconButton name="SkipForward" />
         </div>
     )
 }
