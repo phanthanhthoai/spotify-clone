@@ -4,18 +4,7 @@ import {useEffect, useRef, useState} from "react";
 export default function SongVolumeController({audioRef}) {
     const [isMute, setIsMute] = useState(false);
     const [volume, setVolume] = useState(1);
-    const refBar = useRef(null);
-    const [isMousePress, setIsMousePress] = useState(false);
-
-
-
-    useEffect(() => {
-        document.addEventListener('mouseup', () => {
-            setIsMousePress(false);
-        });
-    }, []);
-
-
+    const [isHover, setIsHover] = useState(false);
 
     useEffect(() => {
         audioRef.current.volume = volume;
@@ -35,18 +24,25 @@ export default function SongVolumeController({audioRef}) {
 
     }, [isMute, audioRef, volume]);
 
+    const onChangeVolume = (event) => {
+        setVolume(event.target.value / 100);
+    }
 
 
     return (
-       <div className="flex gap-1 items-center">
-           <div onClick={() => setIsMute(!isMute)}>
-               <SpotifyIconButton name={isMute ? "VolumeOff" : "Volume2"}></SpotifyIconButton>
-           </div>
-           <div className="w-100px h-4px relative rounded spotify-progress" onMouseDown={() => setIsMousePress(true)}>
-               <div className="w-full bg-white opacity-30 h-full rounded absolute z-0"></div>
-               <div className="bg-white h-full rounded bar relative" ref={refBar}></div>
-
-           </div>
-       </div>
+        <div className="flex gap-1 items-center">
+            <div onClick={() => setIsMute(!isMute)}>
+                <SpotifyIconButton name={isMute ? "VolumeOff" : "Volume2"}></SpotifyIconButton>
+            </div>
+            <input type="range" min={0} max={100} step={1}
+                   className={`spotify-range`}
+                   onChange={onChangeVolume}
+                   onMouseEnter={() => setIsHover(true)}
+                   onMouseLeave={() => setIsHover(false)}
+                   value={volume * 100}
+                   style={{
+                       background: `linear-gradient(to right, ${isHover ? '#1fd760' : '#ffffff'} ${volume * 100}%, #535353 ${volume * 100}%)`
+                   }}/>
+        </div>
     )
 }

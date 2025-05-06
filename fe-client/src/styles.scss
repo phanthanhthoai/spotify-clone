@@ -54,8 +54,16 @@ body {
   height: 4px;
   border-radius: 10px;
   appearance: none;
+  cursor: pointer;
 
   &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+
+  }
+
+
+  &:hover::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 10px;
