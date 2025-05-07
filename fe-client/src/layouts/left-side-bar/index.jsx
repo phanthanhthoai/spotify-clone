@@ -2,7 +2,6 @@ import { Button } from "@chakra-ui/react";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
 import songService from "../../api/songService.js";
 import { play, selectSong, stop } from "../../redux/features/current-song/currentSongSlice.js";
 
@@ -10,11 +9,6 @@ export function LeftSideBar() {
     const [active, setActive] = useState("playlist");
     const songId = useSelector((state) => state.currentSong.songId);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-        navigate('/createPlaylist');
-    };
 
     const onClickToggle = async () => {
         if (songId) {
@@ -33,15 +27,11 @@ export function LeftSideBar() {
 
     return (
         <div className="left-sidebar p-5">
-<<<<<<< HEAD
-            {/* <Button onClick={() => onClickToggle()}>Toggle right side bar</Button> */}
-=======
             {/*<Button onClick={() => onClickToggle()}>Toggle right side bar</Button>*/}
->>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
             <div className="flex items-center">
                 <div className="grow font-bold">Thư viện</div>
                 <div>
-                    <Button className="button-dark" onClick={handleClick}>
+                    <Button className="button-dark">
                         <Plus />
                         <span className="font-bold">Tạo</span>
                     </Button>

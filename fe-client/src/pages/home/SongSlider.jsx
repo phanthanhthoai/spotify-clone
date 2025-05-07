@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -21,46 +21,35 @@ export default function SongSlider() {
     }, []);
 
     const settings = {
-        draggable: false,
+        draggable: false ,
+        dots: true,
         infinite: false, // Đổi thành false nếu ít item
         speed: 500,
-        slidesToShow: 4, // Nên để số lớn hơn 2
+        slidesToShow: 5, // Nên để số lớn hơn 2
         slidesToScroll: 1,
         arrows: false,
         responsive: [
             {
-                breakpoint: 1200, // Khi nhỏ hơn 1200px
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 3,
+                    arrows: true // Thêm dòng này
+                }
+            },
+            {
+                breakpoint: 992,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 1,
-                    arrows: true
-                }
-            },
-            {
-                breakpoint: 900,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    arrows: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: true
+                    slidesToScroll: 2,
+                    arrows: true // Thêm dòng này
                 }
             }
         ]
     };
-    // style={{width:"1001px" , margin: "0 auto"}
+
     return (
-<<<<<<< HEAD
-        <div className="slider-container max-w-full md:max-w-[1000px] mx-auto px-4">
-=======
         <div className="slider-container" style={{ width: "1000px"}}>
->>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
             {listSong.length > 0 && (
                 <Slider {...settings} ref={sliderRef}>
                     {listSong.map((song) => (

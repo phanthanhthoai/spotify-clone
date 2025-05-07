@@ -36,26 +36,15 @@ export const currentSongSlice = createSlice({
 
         selectSong: (state, payload) => {
             state.song = payload.payload;
-<<<<<<< HEAD
-            state.songId = payload.payload.id;
-            state.duration = payload.payload.duration;
-            state.currentTime = 0;
-            state.isPlaying = true;
-=======
             state.isPlaying = true;
         },
 
         pause: (state) => {
             state.isPlaying = false;
->>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
         }
 
     }
 })
 
-<<<<<<< HEAD
-export const { play, stop, updateTime, selectSong } = currentSongSlice.actions;
-=======
 export const {play, stop, updateTime, selectSong, pause} = currentSongSlice.actions;
->>>>>>> 60beb2aeadf0e6058f1768290d7a7ded449afe90
 export default currentSongSlice.reducer;
