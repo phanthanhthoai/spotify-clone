@@ -1,29 +1,27 @@
-import {convertSecondToTimeString} from "../utils/TimeUtils.js";
-import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 
-export default function SpotifyProgressBar() {
-    const currentTime = useSelector(state => state.currentSong.currentTime);
-    const duration = useSelector(state => state.currentSong.duration ?? 1);
-    const [widthBar, setWidthBar] = useState(0);
+export default function SpotifyProgressBar({maxValue, current, onChangePercent, widthBar = 150}) {
+    const [isHover, setIsHover] = useState(false);
+    const [percent, setPercent] = useState(0);
 
     useEffect(() => {
-        const floor = Math.floor(currentTime);
-        const newWidthBar = (floor/duration) * 500;
+        setPercent(Math.floor((current / maxValue) * 100));
+    }, [maxValue, current])
 
-        setWidthBar(newWidthBar);
-
-    }, [currentTime, duration]);
-
+    const onChange = (event) => {
+        onChangePercent(event.target.value * maxValue / 100);
+    }
 
     return (
-        <div className="flex gap-3 justify-center items-center">
-            <div className="text-gray-300 font-semibold text-xs">{convertSecondToTimeString(Math.floor(currentTime))}</div>
-            <div className="w-500px h-4px relative rounded spotify-progress">
-                <div className="w-full bg-white opacity-30 h-full rounded absolute z-0"></div>
-                <div className="bg-white h-full rounded bar relative" style={{width: widthBar + 'px'}}></div>
-            </div>
-            <div className="text-gray-300 font-semibold text-xs">{convertSecondToTimeString(80)}</div>
-        </div>
+        <input type="range" min={0} max={100} step={1}
+               className={`spotify-range`}
+               onChange={onChange}
+               onMouseEnter={() => setIsHover(true)}
+               onMouseLeave={() => setIsHover(false)}
+               value={percent}
+               style={{
+                   width: widthBar + 'px',
+                   background: `linear-gradient(to right, ${isHover ? '#1fd760' : '#ffffff'} ${percent}%, #535353 ${percent}%)`
+               }}/>
     )
 }

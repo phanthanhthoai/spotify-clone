@@ -10,7 +10,7 @@ import authService from "../api/authService.js";
 import {update} from "../redux/features/current-user/currentUserSlice.js";
 
 export default function MainLayout() {
-    let currentSongId = useSelector((state) => state.currentSong.songId);
+    let currentSongId = useSelector((state) => state.currentSong.song?.id);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,11 +35,11 @@ export default function MainLayout() {
                 <div className="grow h-full bg-sky-500 part-layout main-layout">
                     <Outlet></Outlet>
                 </div>
-                {currentSongId && <div className="w-1/5 h-full bg-sky-700 part-layout">
-                    <RightSideBar/>
-                </div>}
+                {/*{currentSongId && <div className="w-1/5 h-full bg-sky-700 part-layout">*/}
+                {/*    <RightSideBar/>*/}
+                {/*</div>}*/}
             </div>
-            <PlayBar></PlayBar>
+            {currentSongId && <PlayBar/>}
         </div>
     )
 }

@@ -21,7 +21,7 @@ export default function SongSlider() {
     }, []);
 
     const settings = {
-        draggable: false,
+        draggable: true,
         infinite: false, // Đổi thành false nếu ít item
         speed: 500,
         slidesToShow: 5, // Nên để số lớn hơn 2
