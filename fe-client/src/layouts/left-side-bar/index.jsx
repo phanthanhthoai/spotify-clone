@@ -1,9 +1,8 @@
 import { Button } from "@chakra-ui/react";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {useEffect} from "react";
 import albumService from "../../api/albumService.js";
 import artistService from "../../api/artistService.js";
 import playlistService from "../../api/playlistService.js";
@@ -23,13 +22,13 @@ export function LeftSideBar() {
         const fetchAllData = async () => {
             try {
                 const [playlistRes, artistRes, albumRes] = await Promise.all([
-                    playlistService.getAllPlaylists(),
+                    playlistService.getPlaylistByUser(),
                     artistService.getAllArtists(),
                     albumService.getAllAlbums()
                 ]);
                 
                 if (playlistRes.status === 200 && playlistRes.data) {
-                    setPlaylists(playlistRes.data.items);
+                    setPlaylists(playlistRes.data);
                 }
     
                 if (artistRes.status === 200 && artistRes.data) {
@@ -68,7 +67,7 @@ export function LeftSideBar() {
     const renderContent = () => {
         switch (active) {
             case "playlist":
-                return playlists.map((item) => (
+                return playlists?.map((item) => (
                     <div
                         key={item.id}
                         className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded cursor-pointer"
@@ -108,13 +107,14 @@ export function LeftSideBar() {
                         className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded cursor-pointer"
                     >
                         <img
-                            src={`${baseApiUrl}/${item.image}` || "/default-music-icon.png"}
-                            alt={item.name}
+                            src={`${baseApiUrl}/${item.cover_image}` || "/default-music-icon.png"}
+                            alt={item.title}
                             className="w-12 h-12 object-cover rounded"
                         />
                         <div className="text-white text-sm">
-                            <div className="font-medium">{item.name}</div>
-                            <div className="text-xs text-gray-400">{item.owner}</div>
+                            <div className="font-medium">{item.title}</div>
+                            <div className="text-xs text-gray-400">{item.artist}</div>
+                            {/* <li key={item.id}>...</li> */}
                         </div>
                     </div>
                 ));
@@ -122,14 +122,6 @@ export function LeftSideBar() {
                 return null;
         }
     };
-    const playlistData = [
-        { id: 1, name: "My Playlist #11", owner: "phan", image: null },
-        { id: 2, name: "My Playlist #10", owner: "phan", image: "/images/playlist10.jpg" },
-        { id: 3, name: "My Playlist #9", owner: "phan", image: null },
-        { id: 4, name: "My Playlist #8", owner: "phan", image: "/images/playlist8.jpg" },
-    ];
-    const artistData = ["Sơn Tùng M-TP", "Mỹ Tâm", "Binz"];
-    const albumData = ["Sky Tour", "Tâm 9", "Rap Việt Hits"];
     return (
         <div className="left-sidebar p-5 text-white">
             <div className="flex items-center">
