@@ -10,7 +10,7 @@ import PlayBar from "./play-bar/index.jsx";
 import { RightSideBar } from "./right-side-bar/index.jsx";
 
 export default function MainLayout() {
-    let currentSongId = useSelector((state) => state.currentSong.songId);
+    let currentSongId = useSelector((state) => state.currentSong.song?.id);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -48,11 +48,12 @@ export default function MainLayout() {
                 </div>
                 {currentSongId && (
                     <div className="w-[25%] bg-sky-700 part-layout">
-                        <RightSideBar song={currentSong} />
+                        <RightSideBar song={currentSong}/>
                     </div>
                 )}
+
             </div>
-            <PlayBar></PlayBar>
+            {currentSongId && <PlayBar/>}
         </div>
     )
 }

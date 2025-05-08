@@ -10,7 +10,7 @@ export default function PlaySongButton({song}) {
     const [isCurrentSong, setIsCurrentSong] = useState(false);
 
     useEffect(() => {
-        setIsCurrentSong(currentSong.id === song.id);
+        setIsCurrentSong(currentSong && currentSong.id === song.id);
     }, [currentSong, song])
 
     const onTogglePlay = () => {
