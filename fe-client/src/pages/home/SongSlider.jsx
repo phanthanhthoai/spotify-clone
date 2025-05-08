@@ -29,45 +29,28 @@ export default function SongSlider() {
         slidesToScroll: 1,
         arrows: false,
         responsive: [
-        
-            // {
-            //     breakpoint: 1100,
-            //     settings: {
-            //         slidesToShow: 5,
-            //         slidesToScroll: 1,
-            //         arrows: true
-            //     }
-            // },
             {
-                breakpoint: 850,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    arrows: true
-                }
+                breakpoint: 1100,
+                settings: { slidesToShow: 4 } // Áp dụng cho màn hình <= 1600px
             },
             {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    arrows: true
-                }
+                breakpoint: 900,
+                settings: { slidesToShow: 3 } // Áp dụng cho màn hình <= 1500px
+            },
+            {
+                breakpoint: 850,
+                settings: { slidesToShow: 2 }
             },
             {
                 breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: true
-                }
+                settings: { slidesToShow: 1 }
             }
         ]
     };
 
 
     return (
-        <div className="slider-container" style={{ maxWidth: "1600px", margin: "0 auto" }}>
+        <div className="slider-container" style={{ maxWidth: "1100px", margin: "0 auto" }}>
             {listSong.length > 0 && (
                 <Slider {...settings} ref={sliderRef}>
                     {listSong.map((song) => (

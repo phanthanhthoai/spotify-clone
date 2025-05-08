@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 const albumService = {
      getAllAlbums: async () => {
-          const rawResponse = await axiosInstance.get("/album/");
+          const rawResponse = await axiosInstance.get("/album/?page=1&size=1000");
           return rawResponse.data;
      },
 

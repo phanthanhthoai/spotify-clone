@@ -52,4 +52,18 @@ class PlaylistViewSet(viewsets.ModelViewSet):
           playlist = self.playlist_service.remove_song_from_playlist(pk, song_id)
           return ApiResponse.build(data=playlist)
      
-     
+     @action(
+        detail=False,
+        methods=['get'],
+        url_path='my-playlists',
+        url_name='my_playlists'
+     )
+     def get_user_playlists(self, request):
+          """ Endpoint lấy playlist không phân trang """
+          playlists = self.playlist_service.get_user_playlists(
+               user=request.user,
+               query_params=request.GET
+          )
+          return ApiResponse.build( 
+               data=PlaylistSerializer(playlists, many=True).data
+          )

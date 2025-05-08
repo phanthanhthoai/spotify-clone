@@ -39,6 +39,8 @@ class PlaylistService(BaseService):
         playlist = get_object_or_404(Playlist, id=playlist_id)
         playlist.delete()
         return {"message": "Playlist đã được xóa thành công!"}
+    
+    
     def add_song_to_playlist(self, playlist_id, song_id):
         playlist = get_object_or_404(Playlist, id=playlist_id)
         song = get_object_or_404(Song, id=song_id)
@@ -48,6 +50,7 @@ class PlaylistService(BaseService):
         PlaylistSong.objects.create(playlist=playlist, song=song)
         return Response ({"message": "Bài hát đã được thêm vào playlist!"})
 
+
     def remove_song_from_playlist(self, playlist_id, song_id):
         playlist = get_object_or_404(Playlist, id=playlist_id)
         song = get_object_or_404(Song, id=song_id)
@@ -55,3 +58,8 @@ class PlaylistService(BaseService):
         playlist_song = get_object_or_404(PlaylistSong, playlist=playlist, song=song)
         playlist_song.delete()
         return Response({"message": "Bài hát đã được xóa khỏi playlist!"})
+
+    def get_user_playlists(self, user, query_params):
+        base_queryset = self.model_class.objects.filter(user=user)
+        filter_set = self.filter_class(query_params, queryset=base_queryset)
+        return filter_set.qs.order_by('created_at')

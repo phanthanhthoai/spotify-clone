@@ -7,7 +7,7 @@ export default function Home() {
                 <div className="text-2xl font-bold mb-1">Được đề xuất cho hôm nay</div>
                 {/*<AlbumSlider/>*/}
                 {/*<ArtistSlider/>*/}
-                <div className="w-full">
+                <div className="slider-wrapper">
                     <SongSlider />
                 </div>
             </div>

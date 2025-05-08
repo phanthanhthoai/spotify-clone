@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 const artistService = {
      getAllArtists: async () => {
-          const rawResponse = await axiosInstance.get("/artist/");
+          const rawResponse = await axiosInstance.get("/artist/?page=1&size=1000");
           return rawResponse.data;
      },
 

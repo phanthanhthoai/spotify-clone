@@ -13,8 +13,8 @@ const playlistService = {
           const rawResponse = await axiosInstance.put(`/playlist/${id}`, data);
           return rawResponse.data;
      },
-     getPlaylistByUserId: async (userId) => {
-          const rawResponse = await axiosInstance.get(`/playlist/user/${userId}`);
+     getPlaylistByUser: async () => {
+          const rawResponse = await axiosInstance.get(`/playlist/my-playlists/`);
           return rawResponse.data;
      },
      
