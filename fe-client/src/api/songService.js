@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 const songService = {
      getAllSongs: async () => {
-          const rawResponse = await axiosInstance.get("/song/");
+          const rawResponse = await axiosInstance.get("/song/?page=1&size=1000");
           return rawResponse.data;
      },
 

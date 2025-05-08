@@ -1,5 +1,4 @@
 import { baseApiUrl } from "../../utils/constants.js";
-import {Play} from "lucide-react";
 import PlaySongButton from "../PlaySongButton.jsx";
 
 export default function SongItem({song}) {
