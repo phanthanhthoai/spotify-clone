@@ -14,9 +14,9 @@ class SongSerializer(serializers.Serializer):
 
 class SongCreateRequestSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
-    artist = serializers.CharField(max_length=255)
+    # artist = serializers.CharField(max_length=255)
     # album_id = serializers.CharField(max_length=255, null=True, blank=True)
-    genre = serializers.CharField(max_length=255)
+    # genre = serializers.CharField(max_length=255)
     release_date = serializers.DateField()
     file = serializers.FileField(required=True)
     image = serializers.ImageField(required=True)
