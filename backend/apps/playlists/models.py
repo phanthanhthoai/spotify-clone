@@ -11,11 +11,17 @@ User = get_user_model()
 
 class Playlist(BaseModel):
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=22, unique=True, default=generate_unique_song_code)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='playlists', name="owner")
+    image = models.ImageField(upload_to="playlists/image", null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = 'playlist'
+        verbose_name = "Playlist"
+        verbose_name_plural = "Playlists"
 
 
 class PlaylistSong(models.Model):  # Tên mới

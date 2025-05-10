@@ -1,3 +1,5 @@
+from itypes import Object
+
 from apps.base_service import BaseService
 from apps.users.models import User
 from apps.users.filters import UserFilter
@@ -33,5 +35,11 @@ class UserService(BaseService):
               raise NotFoundException('User not found')
          
           user.delete()
+
+
+     def create_user(self, data):
+         data['username'] = data['email']
+         user = User.objects.create_user(**data)
+         return user
           
       

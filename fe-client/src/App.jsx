@@ -18,6 +18,7 @@ function App() {
                 </Route>
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Home />}></Route>
+                    <Route path="playlist/:code" element={<PlayList />}></Route>
                     <Route path="playlist" element={<PlayList />}></Route>
                     <Route path="album" element={<Album />}></Route>
                     <Route path="createPlaylist" element={<CreatePlaylist />}></Route>

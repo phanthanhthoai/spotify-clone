@@ -21,13 +21,13 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('apps.users.urls')),
+    path('user', include('apps.users.urls')),
     path('auth', include('apps.authentications.urls')),
     path('role/', include('apps.roles.urls')),
     path('artist/', include('apps.artists.urls')),
-    path('song/', include('apps.songs.urls')),
+    path('song', include('apps.songs.urls')),
     path('album/', include('apps.albums.urls')),
-    path('playlist/', include('apps.playlists.urls')),
+    path('playlist', include('apps.playlists.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

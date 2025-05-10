@@ -19,7 +19,7 @@ const playlistService = {
      },
      
      createPlaylist: async (playlistData) => {
-          const rawResponse = await axiosInstance.post("/playlists", playlistData);
+          const rawResponse = await axiosInstance.post("/playlist", playlistData);
           return rawResponse.data;
      },
      
@@ -27,6 +27,13 @@ const playlistService = {
           const rawResponse = await axiosInstance.delete(`/playlists/${playlistId}`);
           return rawResponse.data;
      },
+
+     getPlaylistByCode: async (code) => {
+          const rawResponse = await axiosInstance.get(`/playlist/${code}`);
+          return rawResponse.data;
+     }
+
+
 
 }
 export default playlistService;

@@ -5,11 +5,14 @@ from apps.users.models import User
 class UserSerializer(serializers.ModelSerializer):
      class Meta:
           model = User
-          fields = ('email', 'password')
+          fields = ('email', 'username', 'id', 'first_name', 'last_name')
           
-class UserCreateRequestSerializer:
+class UserCreateRequestSerializer(serializers.Serializer):
      email = serializers.EmailField()
-     password = serializers.CharField()
+     first_name = serializers.CharField()
+     last_name = serializers.CharField()
      
 class UpdateUserSerializer:
      email = serializers.EmailField()
+     first_name = serializers.CharField()
+     last_name = serializers.CharField()

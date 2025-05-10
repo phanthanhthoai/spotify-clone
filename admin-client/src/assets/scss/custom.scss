@@ -1,0 +1,112 @@
+@use "custom_variable";
+@use "tailwindcss";
+
+@for $v from 1 through 500 {
+  //define width class
+  .w-#{$v}px    { width: $v + px !important; }
+
+  //define height class
+  .h-#{$v}px    { height: $v + px !important; }
+
+  .m-#{$v}px    { margin: $v + px !important; }
+  .p-#{$v}px    { padding: $v + px !important; }
+  .gap-#{$v}px  { gap: $v + px !important; }
+}
+
+.bg-dark-base {
+  background-color:  custom_variable.$color-primary-dark !important;
+}
+
+.transform-scale {
+  transition: 0.3s all ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.custom-icon-button {
+  background-color: custom_variable.$color-dark-normal !important;
+  transition: 0.2s all ease-in-out;
+  color: white;
+
+  &:hover {
+    background-color: custom_variable.$color-dark-highlight !important;
+  }
+}
+
+.button-dark {
+  height: auto;
+  border-radius: 20px;
+  padding: 8px 15px !important;
+  background-color: custom_variable.$color-dark-normal !important;
+  transition: 0.2s all ease-in-out;
+  color: white;
+
+  &:hover {
+    background-color: custom_variable.$color-dark-highlight !important;
+  }
+
+  &.active {
+    background-color: white !important;
+    color: custom_variable.$color-dark-normal !important;
+  }
+}
+
+
+.button-primary {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #1fd760;
+  color: #121212;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: 0.1s all ease-in-out;
+  display: flex;
+  gap: 5px;
+
+  &:active {
+    background-color: #3edf77;
+  }
+}
+
+.chakra-input {
+  border: 1px solid var(--color-gray-400) !important;
+  font-weight: 600;
+  padding: 12px 10px !important;
+  transition: 0.3s all ease-in-out;
+  height: auto !important;
+  border-radius: 6px;
+  outline: none;
+
+  &:focus[aria-invalid="true"]{
+    border-color: red !important;
+  }
+
+  &:hover {
+    border-color: white !important;
+  }
+}
+
+.chakra-field__label {
+  font-weight: 600 !important;
+  font-size: 15px;
+}
+
+.button-danger {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+
+.css-1l1nhrq {
+  padding: 10px 10px !important;
+  font-weight: 600;
+
+  &[data-type="success"] {
+    background-color: #1fd760;
+  }
+}

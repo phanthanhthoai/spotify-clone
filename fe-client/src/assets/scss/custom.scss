@@ -13,22 +13,6 @@
   .gap-#{$v}px  { gap: $v + px !important; }
 }
 
-@for $v from 1 through 100 {
-  .from-#{$v} {
-    background-color: red !important;
-  }
-}
-
-.from-50 {
-  background-color: red !important;
-}
-
-.to-50 {
-  background-color: red;
-}
-
-
-
 .bg-dark-base {
   background-color:  custom_variable.$color-primary-dark !important;
 }
@@ -67,8 +51,4 @@
     background-color: white !important;
     color: custom_variable.$color-dark-normal !important;
   }
-}
-
-@theme {
-  --color-main-green: #1fd760
 }

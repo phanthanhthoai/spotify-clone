@@ -64,6 +64,16 @@ export function LeftSideBar() {
     const handleClick = (type) => {
         navigate("/createplaylist")
     }
+
+    const onCreatePlaylist = async () => {
+        const response = await playlistService.createPlaylist();
+        if (response.status === 200 && response.data && response.data.code) {
+            console.log(response.data.code);
+            navigate('playlist/' + response.data.code);
+        }
+    }
+
+
     const renderContent = () => {
         switch (active) {
             case "playlist":
@@ -126,7 +136,7 @@ export function LeftSideBar() {
         <div className="left-sidebar p-5 text-white">
             <div className="flex items-center">
                 <div className="grow font-bold">Thư viện</div>
-                <Button className="button-dark" onClick={handleClick}>
+                <Button className="button-dark" onClick={onCreatePlaylist}>
                     <Plus />
                     <span className="font-bold ml-1">Tạo</span>
                 </Button>

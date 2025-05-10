@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from apps.playlists.models import Playlist
 from apps.songs.models import Song
+from utils.exceptions import NotFoundException
 from utils.middlewares import AppAuthentication
 from .serializers import PlaylistSerializer, PlaylistCreateRequestSerializer, PlaylistUpdateRequestSerializer, PlaylistSongSerializer
 from rest_framework import status
@@ -24,15 +25,23 @@ class PlaylistViewSet(viewsets.ModelViewSet):
      def list(self, request):
           paginated = self.playlist_service.list(request.GET, request)
           return ApiResponse.build(data=paginated.get_paginated_response(PlaylistSerializer))
+
+
      def retrieve(self, request, pk=None):
           playlist = self.playlist_service.get_playlist(pk)
           return ApiResponse.build(data=PlaylistSerializer(playlist).data)
+
+
      def update(self, request, pk=None):
           playlist = self.playlist_service.update_playlist(pk, PlaylistUpdateRequestSerializer(request.data).data)
           return ApiResponse.build(data=PlaylistSerializer(playlist).data)
+
+
      def destroy(self, request, pk=None):
           self.playlist_service.delete_playlist(pk)
           return ApiResponse.build(message='Delete playlist successfully!')
+
+
      def create(self, request):
           playlist = self.playlist_service.create_playlist(PlaylistCreateRequestSerializer(request.data).data ,request.user)
           return ApiResponse.build(data=PlaylistSerializer(playlist).data)
@@ -67,3 +76,15 @@ class PlaylistViewSet(viewsets.ModelViewSet):
           return ApiResponse.build( 
                data=PlaylistSerializer(playlists, many=True).data
           )
+
+
+     def retrieve_by_code(self, request, code=None):
+          playlist = self.playlist_service.get_by_code(code)
+
+          if playlist is None:
+               raise NotFoundException("Playlist not found")
+
+          if playlist.owner is None or playlist.owner.id != request.user.id:
+               raise NotFoundException("Playlist not found")
+
+          return ApiResponse.build(data=PlaylistSerializer(playlist).data)

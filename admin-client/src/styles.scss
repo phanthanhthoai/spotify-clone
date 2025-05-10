@@ -1,0 +1,110 @@
+@use "assets/scss/custom_variable.scss";
+
+.app-sidebar {
+  background-color:  custom_variable.$color-primary-dark !important;
+}
+
+.app-main {
+  background-color:  custom_variable.$color-primary-dark !important;
+}
+
+.app-sidebar--item {
+  //background-color: custom_variable.$color-dark-normal;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  transition: 0.2s all ease-in-out;
+  &:hover:not(.active) {
+    color:#1fd760
+  }
+
+  &.active {
+    background-color:  #1fd760;
+    color: #1f1f1f;
+  }
+}
+
+.chakra-table__root {
+  background-color: #121212;
+}
+
+.css-11ot24d {
+  color: white;
+  background-color: #121212 !important;
+}
+
+.css-1joodag:nth-of-type(odd) td {
+  background-color: #121212 !important;
+}
+
+.css-1joodag:nth-of-type(even) td {
+  background-color: custom_variable.$color-dark-highlight !important;
+}
+
+.chakra-table__columnHeader {
+  color: custom_variable.$color-primary-dark !important;
+  background-color: #1fd760;
+  padding: 15px 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.chakra-table__cell {
+  padding: 15px 10px;
+  font-size: 14px;
+}
+
+.app-table-container {
+  border: 1px solid custom_variable.$color-dark-highlight;
+  padding: 20px 0;
+  border-radius: 6px;
+}
+
+.pagination-button {
+  cursor: pointer;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s all ease-in-out;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #2a2a2a;
+  }
+
+  &[data-selected] {
+    background-color: #2a2a2a;
+  }
+}
+
+.chakra-select__item {
+  cursor: pointer;
+  background-color: #2a2a2a;
+  padding: 5px;
+  border-radius: 0;
+  transition: 0.2s all ease-in-out;
+
+  &[data-highlighted] {
+    background: #1fd760;
+    color: #121212;
+  }
+}
+
+.chakra-select__content {
+  background: transparent;
+}
+
+.chakra-dialog__content {
+  background-color: #121212;
+  padding: 30px;
+  border: 1px solid #2a2a2a;
+}
+
+.chakra-dialog__title {
+  font-size: large;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}

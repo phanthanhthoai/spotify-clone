@@ -84,10 +84,19 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
     # ],
-    
-    
-    
+
     'EXCEPTION_HANDLER': 'utils.exception_handler.custom_exception_handler',
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
     
 }
 
@@ -144,11 +153,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'spotifyclone',  # Đặt tên database MySQL của bạn
+        'NAME': 'spotify_clone',  # Đặt tên database MySQL của bạn
         'USER': 'root',  # User của MySQL
         'PASSWORD': '123456',  # Mật khẩu MySQL
         'HOST': 'localhost',  # Hoặc IP của máy chủ MySQL
-        'PORT': '3306',  # Cổng MySQL mặc định
+        'PORT': '3307',  # Cổng MySQL mặc định
     }
 }
 
@@ -194,4 +203,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
-# APPEND_SLASH = False
+APPEND_SLASH = False

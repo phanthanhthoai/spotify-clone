@@ -16,10 +16,12 @@ class PlaylistService(BaseService):
     def get_playlists(self):
         return Playlist.objects.all()
 
-    
-    def create_playlist(self,data, user):
-        data['user'] = user
+    def create_playlist(self, data, user):
+        data['owner'] = user
         playlist = Playlist.objects.create(**data)
+
+        playlist.name = "Danh sách phát của tôi #" + str(playlist.id)
+        playlist.save()
         return playlist
 
     
@@ -63,3 +65,8 @@ class PlaylistService(BaseService):
         base_queryset = self.model_class.objects.filter(user=user)
         filter_set = self.filter_class(query_params, queryset=base_queryset)
         return filter_set.qs.order_by('created_at')
+
+
+    def get_by_code(self, code):
+        playlist = Playlist.objects.filter(code=code).first()
+        return playlist
