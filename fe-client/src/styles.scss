@@ -145,3 +145,48 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.song-select-item {
+  transition: 0.2s all ease-in-out;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: #282828;
+  }
+}
+
+.playlist-song-table {
+  width: 100%;
+
+  th {
+    border-bottom: 1px solid #282828;
+    color: #b3b3b3;
+  }
+
+  th, td {
+    padding: 10px 0px;
+    text-align: start;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  -webkit-box-shadow: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  -webkit-box-shadow: none;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

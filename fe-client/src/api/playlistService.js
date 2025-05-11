@@ -31,9 +31,17 @@ const playlistService = {
      getPlaylistByCode: async (code) => {
           const rawResponse = await axiosInstance.get(`/playlist/${code}`);
           return rawResponse.data;
+     },
+
+     getSongsInPlaylist: async (playlistId) => {
+          const rawResponse = await axiosInstance.get(`/playlist/${playlistId}/songs`);
+          return rawResponse.data;
+     },
+
+     addSongToPlaylist: async (playlistId, songId) => {
+          const rawResponse = await axiosInstance.post(`/playlist/${playlistId}/add-song/${songId}`);
+          return rawResponse.data;
      }
-
-
-
 }
+
 export default playlistService;

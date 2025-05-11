@@ -25,7 +25,8 @@ class PlaylistUpdateRequestSerializer(serializers.Serializer):
 class PlaylistSongSerializer(serializers.ModelSerializer):
     title = serializers.CharField(source='song.title')
     duration = serializers.CharField(source='song.duration')
+    image = serializers.CharField(source='song.image')
 
     class Meta:
         model = PlaylistSong
-        fields = ['id','song_id', 'title', 'duration']
+        fields = ['id','song_id', 'title', 'duration', 'image']

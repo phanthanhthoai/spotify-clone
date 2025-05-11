@@ -2,9 +2,11 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import playlistService from "../../api/playlistService.js";
 import {useSelector} from "react-redux";
-import {Music, Search} from "lucide-react";
 import {Music4} from "lucide-react";
-import {Input} from "@chakra-ui/react";
+import AddSong from "./AddSong.jsx";
+import SongList from "./SongList.jsx";
+import songService from "../../api/songService.js";
+import {toaster} from "../../components/ui/toaster.jsx";
 
 export default function PlayList() {
     let {code} = useParams();
@@ -26,11 +28,21 @@ export default function PlayList() {
     }, [code])
 
     useEffect(() => {
-        console.log(playlist)
     }, [playlist]);
 
+    const onSelectSong = async (song) => {
+        const response = await playlistService.addSongToPlaylist(playlist.id, song.id);
+        if (response.status === 200) {
+            toaster.success({description: "Thêm bài hát vào playlist thành công!"});
+            setPlaylist({...playlist});
+            return;
+        }
+
+        toaster.error({description: response.message});
+    }
+
     return (
-        <div className="h-full w-full">
+        <div className="w-full overflow-y-scroll" style={{height: '90vh', overflowY: 'overlay'}}>
             {playlist && (
                 <div className="h-full w-full">
                     <div className="playlist-header w-full flex gap-5 items-center relative" style={{background: `linear-gradient(transparent 0, ${dominantColor}) 100%)`}}>
@@ -47,15 +59,13 @@ export default function PlayList() {
                     <div className="relative">
                         <div className="h-300px w-full absolute" style={{backgroundColor: dominantColor, isolation: 'isolate', backgroundImage: '-webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.6)),to(#121212))'}}></div>
                         <div className="relative p-7">
-                            <div className="text-2xl font-bold">Hãy cùng tìm nội dung cho danh sách phát của bạn</div>
-                            <div>
-                                <div className="relative d-flex items-center  mt-5">
-                                    <input className="spotify-input px-10 py-3" placeholder="Tìm kiếm bài hát"/>
-                                    <div className="absolute absolute-middle ms-2">
-                                        <Search color="#ffffffb3"/>
-                                    </div>
+                            <SongList playlist={playlist}/>
+                            <div className="mt-7">
+                                <div className="text-2xl font-bold">Hãy cùng tìm nội dung cho danh sách phát của bạn</div>
+                                <div>
+                                    <AddSong onSelectSong={(song) => onSelectSong(song)}/>
                                 </div>
-                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>

@@ -54,7 +54,7 @@ class PlaylistViewSet(viewsets.ModelViewSet):
      @action(detail=True, methods=['post'], url_path='add-song/(?P<song_id>\d+)')
      def add_song_to_playlist(self, request, pk=None, song_id=None):
           playlist = self.playlist_service.add_song_to_playlist(pk, song_id)
-          return ApiResponse.build(data=playlist)
+          return ApiResponse.build(data=PlaylistSerializer(playlist).data)
      
      @action(detail=True, methods=['post'], url_path='remove-song/(?P<song_id>\d+)')
      def remove_song_from_playlist(self, request, pk=None, song_id=None):

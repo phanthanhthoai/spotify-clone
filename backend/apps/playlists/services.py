@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404
+
+from utils.exceptions import ValidationException
 from .models import Playlist, PlaylistSong
 from apps.songs.models import Song
 from apps.base_service import BaseService
@@ -47,10 +49,10 @@ class PlaylistService(BaseService):
         playlist = get_object_or_404(Playlist, id=playlist_id)
         song = get_object_or_404(Song, id=song_id)
         if PlaylistSong.objects.filter(playlist=playlist, song=song).exists():
-            return {"message": "Bài hát đã có trong playlist!"}
+            raise ValidationException("Bài hát đã tồn tại trong playlist")
         
         PlaylistSong.objects.create(playlist=playlist, song=song)
-        return Response ({"message": "Bài hát đã được thêm vào playlist!"})
+        return playlist
 
 
     def remove_song_from_playlist(self, playlist_id, song_id):

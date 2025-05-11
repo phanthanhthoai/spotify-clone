@@ -26,8 +26,8 @@ const songService = {
           return rawResponse.data;
      },
 
-     getListSong: async () => {
-          const rawResponse = await axiosInstance.get("/song?page=1&size=20");
+     getListSong: async (filter) => {
+          const rawResponse = await axiosInstance.get(`/song?page=1&size=10${filter}`);
           return rawResponse.data;
      }
 }
