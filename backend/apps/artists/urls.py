@@ -6,7 +6,6 @@ router = DefaultRouter()
 router.register('', ArtistViewSet, basename='artist')
 
 urlpatterns = [
-    path('', ArtistViewSet.as_view({'get': 'list'}), name='artist-list'),
+    path('', ArtistViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('/<int:pk>', ArtistViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
-    path('/create/', ArtistViewSet.as_view({'post': 'create'}), name='artist-create'),
 ]

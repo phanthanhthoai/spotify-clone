@@ -1,37 +1,36 @@
+import {useNavigate} from "react-router";
+import * as Yup from "yup";
 import {Form, Formik} from "formik";
 import {Button, FileUpload, Input} from "@chakra-ui/react";
 import {Save} from "lucide-react";
 import FormInputField from "../../components/FormInputField.jsx";
-import * as Yup from "yup";
-import SongService from "../../api/songService.js";
+import FormTextareaField from "../../components/FormTextareaField.jsx";
+import {artistService} from "../../api/artistService.js";
 import {toaster} from "../../components/ui/toaster.jsx";
-import {useNavigate} from "react-router";
 
-export default function CreateSong() {
+export default function CreateArtist() {
     const navigate = useNavigate();
     const validateForm = Yup.object({
-        title: Yup.string().required("Vui lòng nhập tiêu đề"),
-        image: Yup.mixed().required("Vui lòng chọn hình ảnh"),
-        file: Yup.mixed().required("Vui lòng chọn file âm thanh")
-    });
+        name: Yup.string().required("Vui lòng nhập tên nghệ sĩ"),
+        image: Yup.mixed().required("Vui lòng tải lên hình ảnh"),
+        description: Yup.string().required("Vui lòng nhập giới thiệu")
+    })
+
     const initialValues = {
-        title: '',
-        file: null,
-        image: null
+        name: ""
     }
 
-
-    const onSubmit = async (values, {setSubmitting}) => {
-        values['release_date'] = '2025-01-01';
-        const response = await SongService.createSong(values);
+    const onSubmit = async (values) => {
+        const response = await artistService.createArtist(values);
         if (response.status === 200) {
-            toaster.success({description: "Tạo bài hát thành công!"});
-            navigate('/song');
+            toaster.success({
+                description: "Tạo nghệ sĩ thành công"
+            });
+
             return;
         }
 
         toaster.error({description: response.message});
-
     }
 
     return (
@@ -40,7 +39,7 @@ export default function CreateSong() {
                 {({isSubmitting, setFieldValue}) => (
                     <Form>
                         <div className="flex justify-between">
-                            <div className="text-2xl font-semibold">Tạo mới bài hát</div>
+                            <div className="text-2xl font-semibold">Tạo mới nghệ sĩ</div>
                             <Button className="button-dark flex gap-2 font-semibold cursor-pointer" type="submit">
                                 <Save/>
                                 <span>Lưu</span>
@@ -50,13 +49,13 @@ export default function CreateSong() {
                         <div className="mt-5">
                             <div className="flex gap-3">
                                 <div className="w-1/2">
-                                    <FormInputField name="title" label="Tiêu đề bài hát" placeholder="Nhập tiêu đề bài hát"></FormInputField>
+                                    <FormInputField name="name" label="Tên nghệ sĩ" placeholder="Nhập tên nghệ sĩ"></FormInputField>
                                 </div>
 
                                 <div className="w-1/2">
                                     <FileUpload.Root gap="1" onFileChange={(event) => setFieldValue('image', event.acceptedFiles[0])}>
                                         <FileUpload.HiddenInput />
-                                        <FileUpload.Label><div className="font-semibold text-[15px]">Hình ảnh</div></FileUpload.Label>
+                                        <FileUpload.Label><div className="font-semibold text-[15px]">Ảnh đại diện</div></FileUpload.Label>
                                         <Input asChild>
                                             <FileUpload.Trigger>
                                                 <FileUpload.FileText lineClamp={1}/>
@@ -66,18 +65,8 @@ export default function CreateSong() {
                                 </div>
                             </div>
 
-                            <div className="flex gap-3 mt-5">
-                                <div className="w-1/2">
-                                    <FileUpload.Root gap="1" onFileChange={(event) => setFieldValue('file', event.acceptedFiles[0])}>
-                                        <FileUpload.HiddenInput />
-                                        <FileUpload.Label><div className="font-semibold text-[15px]">Tệp âm thanh</div></FileUpload.Label>
-                                        <Input asChild>
-                                            <FileUpload.Trigger>
-                                                <FileUpload.FileText lineClamp={1}/>
-                                            </FileUpload.Trigger>
-                                        </Input>
-                                    </FileUpload.Root>
-                                </div>
+                            <div className="w-1/2 mt-5">
+                                <FormTextareaField name="description" label="Giới thiệu" placeholder="Nhập giới thiệu"></FormTextareaField>
                             </div>
                         </div>
                     </Form>
@@ -85,4 +74,5 @@ export default function CreateSong() {
             </Formik>
         </div>
     )
+
 }

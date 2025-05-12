@@ -10,7 +10,7 @@ export default function AppLayout() {
                 <div className="w-300px h-full">
                     <SideBar/>
                 </div>
-                <div className="app-main grow p-7">
+                <div className="app-main grow p-7 ">
                     <Outlet/>
                 </div>
             </div>

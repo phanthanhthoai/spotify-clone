@@ -9,8 +9,8 @@ class ArtistSerializer(serializers.ModelSerializer):
           
 class ArtistCreateRequestSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255)
-    birthday = serializers.DateField()
-    country = serializers.CharField(max_length=100)
+    birthday = serializers.DateField(required=False)
+    country = serializers.CharField(max_length=100, required=False)
     image = serializers.ImageField(required=False)
      
 class UpdateArtistSerializer(serializers.Serializer):

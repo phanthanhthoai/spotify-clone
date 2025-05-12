@@ -28,9 +28,7 @@ export default function SongList({ playlist }) {
             if (response.status === 200 && response.data) {
                 setSongList(response.data);
                 console.log(response.data);
-
             }
-
         }
 
         fetchList(playlist.id);
