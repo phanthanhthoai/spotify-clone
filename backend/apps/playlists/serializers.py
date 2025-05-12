@@ -30,14 +30,10 @@ class PlaylistUpdateRequestSerializer(serializers.Serializer):
     image = serializers.ImageField(required=False)
 
 class PlaylistSongSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=255)
-    artist = serializers.CharField(max_length=255)
-    genre = serializers.CharField(max_length=255)
-    release_date = serializers.DateField()
-    duration = serializers.IntegerField()
-    file = serializers.FileField(required=True)
-    image = serializers.ImageField(required=True)
-    
+    title = serializers.CharField(source='song.title')
+    duration = serializers.CharField(source='song.duration')
+    image = serializers.CharField(source='song.image')
+    # file = serializers.FileField(required=True)
     class Meta:
         model = PlaylistSong
-        fields = ['id','artist','genre','release_date','duration','file','image']
+        fields = ['id','song_id', 'title', 'duration', 'image']
