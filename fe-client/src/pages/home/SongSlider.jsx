@@ -8,13 +8,25 @@ import SongItem from "../../components/items/SongItem.jsx";
 export default function SongSlider() {
     const [listSong, setListSong] = useState([]);
     const sliderRef = useRef(null);
-
+    const [resL, setResL] = useState([]);
+    function getAudioDuration(url) {
+        return new Promise((resolve) => {
+            const audio = new Audio(url);
+            audio.addEventListener('loadedmetadata', () => {
+                resolve(audio.duration);
+            });
+            audio.addEventListener('error', () => {
+                resolve(0);
+            });
+        });
+    }
     useEffect(() => {
         const fetchList = async () => {
             const response = await songService.getAllSongs();
             if (response.status === 200 && response.data) {
                 setListSong(response.data.items);
             }
+            
         };
 
         fetchList();

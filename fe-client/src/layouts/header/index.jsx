@@ -6,13 +6,16 @@ import SpotifyIconButton from "../../components/SpotifyIconButton.jsx";
 import UserMenu from "./UserMenu.jsx";
 
 export default function Header() {
+    const handleClick = () => {
+        window.location.href = "/";
+    }
     return (
         <div className="header-layout flex items-center">
             <div>
                 <img src={logo} className="w-35px"/>
             </div>
             <div className="grow flex justify-center items-center gap-3">
-                <IconButton rounded="full" size="lg" className="custom-icon-button">
+                <IconButton rounded="full" size="lg" className="custom-icon-button" onClick={handleClick}>
                     <House className="w-20px h-20px"/>
                 </IconButton>
 

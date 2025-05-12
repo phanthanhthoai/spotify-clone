@@ -7,7 +7,7 @@ const albumService = {
      },
 
      getAlbumById: async (id) => {
-          const rawResponse = await axiosInstance.get(`/album/${id}/`);
+          const rawResponse = await axiosInstance.get(`/album/${id}`);
           return rawResponse.data;
      },
 
@@ -24,7 +24,12 @@ const albumService = {
      deleteAlbum: async (id) => {
           const rawResponse = await axiosInstance.delete(`/album/${id}/`);
           return rawResponse.data;
-     }
+     },
+     
+     getSonginAlbum: async (id) => {
+          const rawResponse = await axiosInstance.get(`/album/${id}/songs`);
+          return rawResponse.data;
+     },
 }
 
 export default albumService;

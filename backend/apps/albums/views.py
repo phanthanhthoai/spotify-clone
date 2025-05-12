@@ -60,12 +60,17 @@ class AlbumViewSet(ViewSet):
         serializer.is_valid(raise_exception=True)
         album = self.album_service.create_album(serializer.validated_data, request.user)
         return ApiResponse.build(data=AlbumSerializer(album).data)
-    
+    @action(detail=True, methods=['get'], url_path='songs')
+    def get_songs_in_album(self, request, pk=None):
+        songs = self.album_service.get_song_in_album(pk)
+        return ApiResponse.build(data=AlbumSongSerializer(songs, many=True).data)
     
     @action(detail=True, methods=['get'], url_path='songs')
     def get_albums_by_artist(self, request, artist_id):
         albums = self.album_service.get_albums_by_artist(artist_id)
         return ApiResponse.build(data=AlbumSerializer(albums, many=True).data)
+    
+    
     
     
     @action(detail=True, methods=['post'], url_path='add-song/(?P<song_id>\d+)')

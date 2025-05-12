@@ -26,7 +26,7 @@ export default function PlayList() {
             fetchPlaylist(code);
         }
     }, [code])
-
+    console.log("user: ", currentUser);
     useEffect(() => {
     }, [playlist]);
 
@@ -52,7 +52,7 @@ export default function PlayList() {
                             {!playlist.image && <div className="playlist-image flex items-center justify-center rounded-[6px] w-230px h-230px"><Music4 color="#535353" className="w-20 h-20" /></div>}
                             <div className="flex items-start flex-col">
                                 <div className="text-[5rem] font-black">{playlist.name}</div>
-                                <div className="text-[16px] ms-1 font-bold">Mango</div>
+                                <div className="text-[16px] ms-1 font-bold">aaaa</div>
                             </div>
                         </div>
                     </div>

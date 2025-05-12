@@ -117,6 +117,9 @@ export function LeftSideBar() {
                 return albums.map((item) => (
                     <div
                         key={item.id}
+                        onClick={() => {
+                            navigate(`/album/${item.id}`);
+                        }}
                         className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded cursor-pointer"
                     >
                         <img
