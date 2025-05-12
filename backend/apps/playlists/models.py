@@ -19,7 +19,7 @@ class Playlist(BaseModel):
         return self.name
 
     class Meta:
-        db_table = 'playlists_playlist'
+        db_table = 'playlist'
         verbose_name = "Playlist"
         verbose_name_plural = "Playlists"
 
@@ -27,6 +27,7 @@ class Playlist(BaseModel):
 class PlaylistSong(models.Model):  # Tên mới
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
     song = models.ForeignKey('songs.Song', on_delete=models.CASCADE)
+
     
     class Meta:
         unique_together = ('playlist', 'song')

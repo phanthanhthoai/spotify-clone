@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Playlist, PlaylistSong
 from apps.songs.models import Song
 from apps.authentications.views import AuthViewSet
+from ..songs.serializers import SongSerializer
 from ..users.serializers import UserSerializer
 
 
@@ -30,14 +31,12 @@ class PlaylistUpdateRequestSerializer(serializers.Serializer):
     image = serializers.ImageField(required=False)
 
 class PlaylistSongSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=255)
-    artist = serializers.CharField(max_length=255)
-    genre = serializers.CharField(max_length=255)
-    release_date = serializers.DateField()
-    duration = serializers.IntegerField()
-    file = serializers.FileField(required=True)
-    image = serializers.ImageField(required=True)
-    
+    title = serializers.CharField(source="song.title", required=False)
+    duration = serializers.CharField(source="song.duration", required=False)
+    id = serializers.IntegerField(source="song.id", required=False)
+    image = serializers.ImageField(source="song.image", required=False)
+    file = serializers.FileField(source="song.file", required=False)
+
     class Meta:
         model = PlaylistSong
-        fields = ['id','artist','genre','release_date','duration','file','image']
+        fields = ['title', 'duration', 'id', 'image', 'file']

@@ -23,6 +23,11 @@ const SongService = {
         const raw = await axiosInstance.putForm(`/song/${id}`, data);
         return raw.data;
     },
+
+    getListSongWithTitle: async (title) => {
+        const raw = await axiosInstance.get(`/song?title=${title}&size=5`);
+        return raw.data;
+    }
 }
 
 export default SongService;

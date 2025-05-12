@@ -70,7 +70,7 @@
   }
 }
 
-.chakra-input {
+.chakra-input, .chakra-textarea {
   border: 1px solid var(--color-gray-400) !important;
   font-weight: 600;
   padding: 12px 10px !important;
@@ -102,7 +102,7 @@
 }
 
 
-.css-1l1nhrq {
+.css-1l1nhrq, .css-3yd9y9 {
   padding: 10px 10px !important;
   font-weight: 600;
 
@@ -110,3 +110,4 @@
     background-color: #1fd760;
   }
 }
+

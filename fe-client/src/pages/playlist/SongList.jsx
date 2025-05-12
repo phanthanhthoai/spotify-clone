@@ -42,7 +42,7 @@ export default function SongList({ playlist }) {
                             <td>{song.title}</td>
                             <td>{song.artist}</td>
                             <td>
-                                <img src={`${baseApiUrl}//media/${song.image}`} className="w-40px h-40px object-cover rounded-[3px]" />
+                                <img src={`${baseApiUrl}/${song.image}`} className="w-40px h-40px object-cover rounded-[3px]" />
                             </td>
                             <td> <PlaySongButton song={song} /></td>
                             <td>{convertSecondToTimeString(song.duration)}</td>

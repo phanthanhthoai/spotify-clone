@@ -23,10 +23,9 @@ export default function UpdateSong() {
      useEffect(() => {
           const fetchSong = async (id) => {
                const response = await SongService.getSong(id);
-               console.log(response.data);
                if (response.status === 200) {
                     console.log("Dữ liệu nhận được:", response.data);
-                    setSong(response);
+                    setSong(response.data);
                }
           }
           if (param.id) {
