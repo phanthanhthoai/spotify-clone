@@ -19,7 +19,7 @@ class Playlist(BaseModel):
         return self.name
 
     class Meta:
-        db_table = 'playlist'
+        db_table = 'playlists_playlist'
         verbose_name = "Playlist"
         verbose_name_plural = "Playlists"
 

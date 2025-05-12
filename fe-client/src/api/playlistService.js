@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 const playlistService = {
      getAllPlaylists: async () => {
-          const rawResponse = await axiosInstance.get("/playlist/?page=1&size=1000");
+          const rawResponse = await axiosInstance.get("/playlist?page=1&size=1000");
           return rawResponse.data;
      },
      getPlaylistById: async (id) => {
@@ -24,7 +24,7 @@ const playlistService = {
      },
      
      deletePlaylist: async (playlistId) => {
-          const rawResponse = await axiosInstance.delete(`/playlists/${playlistId}`);
+          const rawResponse = await axiosInstance.delete(`/playlist/${playlistId}`);
           return rawResponse.data;
      },
 

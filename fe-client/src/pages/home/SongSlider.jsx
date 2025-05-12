@@ -11,7 +11,7 @@ export default function SongSlider() {
 
     useEffect(() => {
         const fetchList = async () => {
-            const response = await songService.getListSong();
+            const response = await songService.getAllSongs();
             if (response.status === 200 && response.data) {
                 setListSong(response.data.items);
             }

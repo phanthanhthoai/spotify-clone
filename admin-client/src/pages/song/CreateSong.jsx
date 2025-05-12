@@ -5,7 +5,7 @@ import FormInputField from "../../components/FormInputField.jsx";
 import * as Yup from "yup";
 import {HiUpload} from "react-icons/hi";
 import {LuFileUp} from "react-icons/lu";
-import {SongService} from "../../api/songService.js";
+import SongService from "../../api/songService.js";
 
 export default function CreateSong() {
     const validateForm = Yup.object({

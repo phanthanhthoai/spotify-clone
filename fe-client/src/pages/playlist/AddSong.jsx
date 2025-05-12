@@ -1,8 +1,7 @@
-import {Search} from "lucide-react";
-import {useEffect, useState} from "react";
+import { Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import SongService from "../../api/songService.js";
-import {baseApiUrl} from "../../utils/constants.js";
-import {Button} from "@chakra-ui/react";
+import { baseApiUrl } from "../../utils/constants.js";
 
 export default function AddSong({onSelectSong}) {
     const [search, setSearch] = useState('');
@@ -16,7 +15,7 @@ export default function AddSong({onSelectSong}) {
         const fetchList = async (search) => {
             const filter = `&title=${search}`;
             const response = await SongService.getListSong(filter);
-
+            console.log("response: ", response);
             if (response.status === 200 && response.data && response.data.items) {
                 setListSong(response.data.items);
             }

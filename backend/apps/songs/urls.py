@@ -11,6 +11,6 @@ router.register('', SongViewSet, basename='song')
 urlpatterns = [
     path('', SongViewSet.as_view({'post': 'create', 'get': 'list'}, permission_classes=[], authentication_classes=[])),
 
-    path('<int:pk>', SongViewSet.as_view({'get': 'retrieve', 'delete': 'destroy', 'put': 'update'}), name='song-detail'),
+    path('/<int:pk>', SongViewSet.as_view({'get': 'retrieve', 'delete': 'destroy', 'put': 'update'}), name='song-detail'),
     # path('', include(router.urls)),
 ]

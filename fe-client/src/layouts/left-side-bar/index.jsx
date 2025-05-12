@@ -26,15 +26,15 @@ export function LeftSideBar() {
                     artistService.getAllArtists(),
                     albumService.getAllAlbums()
                 ]);
-                
+                console.log("Playlist Data:", playlistRes.data);
                 if (playlistRes.status === 200 && playlistRes.data) {
                     setPlaylists(playlistRes.data);
                 }
-    
+
                 if (artistRes.status === 200 && artistRes.data) {
                     setListArtists(artistRes.data.items);
                 }
-    
+
                 if (albumRes.status === 200 && albumRes.data) {
                     setListAlbums(albumRes.data.items);
                 }
@@ -42,11 +42,11 @@ export function LeftSideBar() {
                 console.error("Lỗi khi gọi API:", error);
             }
         };
-    
+
         fetchAllData();
     }, []);
 
-    
+
     const onClickToggle = async () => {
         if (songId) {
             dispatch(stop());
@@ -80,11 +80,14 @@ export function LeftSideBar() {
                 return playlists?.map((item) => (
                     <div
                         key={item.id}
+                        onClick={() => {
+                            navigate(`/playlist/${item.code}`);
+                        }}
                         className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded cursor-pointer"
                     >
                         <img
-                            src={item.image || "/default-music-icon.png"}
-                            alt={item.name}
+                            src={item.image ? item.image : "public/may.jpg"}
+                            alt={item.name} 
                             className="w-12 h-12 object-cover rounded"
                         />
                         <div className="text-white text-sm">
@@ -101,7 +104,7 @@ export function LeftSideBar() {
                         className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded cursor-pointer"
                     >
                         <img
-                            src={`${baseApiUrl}/${item.image}` || "/default-music-icon.png"}
+                            src={`${baseApiUrl}/${item.image}`?`${baseApiUrl}/${item.image}`: "public/may.jpg"}
                             alt={item.name}
                             className="w-12 h-12 object-cover rounded"
                         />
@@ -117,7 +120,7 @@ export function LeftSideBar() {
                         className="flex items-center gap-3 p-2 hover:bg-gray-700 rounded cursor-pointer"
                     >
                         <img
-                            src={`${baseApiUrl}/${item.cover_image}` || "/default-music-icon.png"}
+                            src={`${baseApiUrl}/${item.coverImage}`?`${baseApiUrl}/${item.coverImage}` : "public/may.jpg"}
                             alt={item.title}
                             className="w-12 h-12 object-cover rounded"
                         />

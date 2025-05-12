@@ -6,7 +6,7 @@ from apps.playlists.models import Playlist
 from apps.songs.models import Song
 from utils.exceptions import NotFoundException
 from utils.middlewares import AppAuthentication
-from .serializers import PlaylistSerializer, PlaylistCreateRequestSerializer, PlaylistUpdateRequestSerializer, PlaylistSongSerializer
+from .serializers import PlaylistSerializer, PlaylistCreateRequestSerializer, PlaylistUpdateRequestSerializer, PlaylistSongSerializer, PlaylistDetailSerializer
 from rest_framework import status
 from apps.songs.serializers import SongSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -70,11 +70,11 @@ class PlaylistViewSet(viewsets.ModelViewSet):
      def get_user_playlists(self, request):
           """ Endpoint lấy playlist không phân trang """
           playlists = self.playlist_service.get_user_playlists(
-               user=request.user,
+               request.user,
                query_params=request.GET
           )
-          return ApiResponse.build( 
-               data=PlaylistSerializer(playlists, many=True).data
+          return ApiResponse.build(
+               data=PlaylistDetailSerializer(playlists, many=True).data
           )
 
 

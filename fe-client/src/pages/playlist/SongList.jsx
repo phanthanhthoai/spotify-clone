@@ -1,10 +1,13 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import playlistService from "../../api/playlistService.js";
-import {convertSecondToTimeString} from "../../utils/TimeUtils.js";
+import songService from "../../api/songService.js";
+import PlaySongButton from "../../components/PlaySongButton.jsx";
+import { convertSecondToTimeString } from "../../utils/TimeUtils.js";
+import { baseApiUrl } from "../../utils/constants.js";
 
-export default function SongList({playlist}) {
+
+export default function SongList({ playlist }) {
     const [songList, setSongList] = useState([]);
-
     useEffect(() => {
         console.log("playlist: ", playlist);
         const fetchList = async (playlistId) => {
@@ -22,27 +25,29 @@ export default function SongList({playlist}) {
         <div>
             <table className="playlist-song-table">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Tiêu đề</th>
-                    <th>Nghệ sĩ</th>
-                    <th>Album</th>
-                    <th>Ngày thêm</th>
-                    <th>Thời lượng</th>
-                </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Tiêu đề</th>
+                        <th>Nghệ sĩ</th>
+                        <th>Hình ảnh</th>
+                        <th>Phát</th>
+                        <th>Thời lượng</th>
+                    </tr>
                 </thead>
 
                 <tbody>
-                {songList.map((song, index) => (
-                    <tr>
-                        <td>{index + 1}</td>
-                        <td>{song.title}</td>
-                        <td>{}</td>
-                        <td></td>
-                        <td></td>
-                        <td>{convertSecondToTimeString(song.duration)}</td>
-                    </tr>
-                ))}
+                    {songList.map((song, index) => (
+                        <tr>
+                            <td>{index + 1}</td>
+                            <td>{song.title}</td>
+                            <td>{song.artist}</td>
+                            <td>
+                                <img src={`${baseApiUrl}//media/${song.image}`} className="w-40px h-40px object-cover rounded-[3px]" />
+                            </td>
+                            <td> <PlaySongButton song={song} /></td>
+                            <td>{convertSecondToTimeString(song.duration)}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

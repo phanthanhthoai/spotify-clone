@@ -1,7 +1,4 @@
-import {useEffect, useState} from "react";
-import userService from "../../api/userService.js";
 import {
-    Button,
     ButtonGroup,
     createListCollection,
     IconButton,
@@ -10,11 +7,14 @@ import {
     Select,
     Table
 } from "@chakra-ui/react";
-import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
-import {CirclePlus, Plus, Trash, Trash2} from "lucide-react";
-import {Link} from "react-router";
+import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import { Link } from "react-router";
+import userService from "../../api/userService.js";
 import DeleteButton from "../../components/DeleteButton.jsx";
-import {toaster} from "../../components/ui/toaster.jsx";
+import { toaster } from "../../components/ui/toaster.jsx";
+import UpdateButton from "../../components/UpdateButton.jsx";
 
 export default function User() {
     const [userList, setUserList] = useState([]);
@@ -45,7 +45,9 @@ export default function User() {
     const onPageSizeChange = (event) => {
         setPagination({...pagination, size: event.value})
     }
-
+    const onUpdate = (user) => {
+        window.location.href = `/user/${user.id}`;
+    }
     const onDelete = async (user) => {
         const response = await userService.deleteUser(user.id);
         if (response.status === 200) {
@@ -91,6 +93,7 @@ export default function User() {
                                 <Table.Cell>{user.id}</Table.Cell>
                                 <Table.Cell>
                                     <div className="flex justify-end">
+                                        <UpdateButton onUpdate={() => onUpdate(user)}/>
                                         <DeleteButton onDelete={() => onDelete(user)}/>
                                     </div>
                                 </Table.Cell>

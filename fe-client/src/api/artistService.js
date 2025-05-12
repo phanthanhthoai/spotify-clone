@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 const artistService = {
      getAllArtists: async () => {
-          const rawResponse = await axiosInstance.get("/artist/?page=1&size=1000");
+          const rawResponse = await axiosInstance.get("/artist?page=1&size=1000");
           return rawResponse.data;
      },
 
@@ -12,7 +12,7 @@ const artistService = {
      },
 
      createArtist: async (data) => {
-          const rawResponse = await axiosInstance.post("/artist/", data);
+          const rawResponse = await axiosInstance.post("/artist", data);
           return rawResponse.data;
      },
 

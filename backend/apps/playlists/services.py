@@ -64,7 +64,7 @@ class PlaylistService(BaseService):
         return Response({"message": "Bài hát đã được xóa khỏi playlist!"})
 
     def get_user_playlists(self, user, query_params):
-        base_queryset = self.model_class.objects.filter(user=user)
+        base_queryset = self.model_class.objects.filter(owner_id=user.id)
         filter_set = self.filter_class(query_params, queryset=base_queryset)
         return filter_set.qs.order_by('created_at')
 

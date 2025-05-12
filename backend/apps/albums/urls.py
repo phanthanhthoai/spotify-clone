@@ -9,6 +9,6 @@ router.register('', AlbumViewSet, basename='album')
 
 urlpatterns = [
     path('', AlbumViewSet.as_view({'get': 'list', 'post': 'create'}), name='album-list'),
-    path('<int:pk>', AlbumViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
+    path('/<int:pk>', AlbumViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
     path('', include(router.urls)),
 ]

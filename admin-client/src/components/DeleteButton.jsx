@@ -1,6 +1,7 @@
 import {Button, CloseButton, Dialog, Portal} from "@chakra-ui/react";
 import {Trash2} from "lucide-react";
 
+
 export default function DeleteButton({onDelete}) {
     return (
         <Dialog.Root role="alertdialog" placement="center">
